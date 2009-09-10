@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<graphicTemplate id="Zener Diode" extScale="True" extRotate="True" extConnect="True" keepAspectRatio="True">
+  <points>
+    <point id="PT_0" x="0" y="0" controllable="False" connectable="False" />
+    <point id="PT_1" x="166" y="166" controllable="False" connectable="False" />
+    <point id="PT_2" x="83" y="166" controllable="False" connectable="False" />
+    <point id="PT_3" x="0" y="84" controllable="False" connectable="True" />
+    <point id="PT_4" x="64" y="84" controllable="False" connectable="False" />
+    <point id="PT_5" x="64" y="61" controllable="False" connectable="False" />
+    <point id="PT_6" x="64" y="107" controllable="False" connectable="False" />
+    <point id="PT_7" x="64" y="107" controllable="False" connectable="False" />
+    <point id="PT_8" x="105" y="85" controllable="False" connectable="False" />
+    <point id="PT_9" x="106" y="84" controllable="False" connectable="False" />
+    <point id="PT_10" x="65" y="62" controllable="False" connectable="False" />
+    <point id="PT_11" x="106" y="84" controllable="False" connectable="False" />
+    <point id="PT_12" x="168" y="84" controllable="False" connectable="True" />
+    <point id="PT_13" x="107" y="58" controllable="False" connectable="False" />
+    <point id="PT_14" x="107" y="109" controllable="False" connectable="False" />
+    <point id="PT_15" x="117" y="48" controllable="False" connectable="False" />
+    <point id="PT_16" x="107" y="58" controllable="False" connectable="False" />
+    <point id="PT_17" x="97" y="116" controllable="False" connectable="False" />
+    <point id="PT_18" x="107" y="109" controllable="False" connectable="False" />
+  </points>
+  <drawings>
+    <arc leftTop="PT_0" rightDown="PT_1" startPoint="PT_2" endPoint="PT_2" style="def" />
+    <line startPoint="PT_3" endPoint="PT_4" style="def" />
+    <line startPoint="PT_5" endPoint="PT_6" style="def" />
+    <line startPoint="PT_7" endPoint="PT_8" style="def" />
+    <line startPoint="PT_9" endPoint="PT_10" style="def" />
+    <line startPoint="PT_11" endPoint="PT_12" style="def" />
+    <line startPoint="PT_13" endPoint="PT_14" style="def" />
+    <line startPoint="PT_15" endPoint="PT_16" style="def" />
+    <line startPoint="PT_17" endPoint="PT_18" style="def" />
+  </drawings>
+  <fillings />
+  <styles>
+    <drawingStyle id="def" red="0" green="0" blue="0" width="1" style="solid" />
+  </styles>
+</graphicTemplate>

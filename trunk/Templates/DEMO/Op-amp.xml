@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<graphicTemplate id="Opamp" extScale="True" extRotate="True" extConnect="False" keepAspectRatio="True">
+  <points>
+    <point id="PT_0" x="41" y="43" controllable="False" connectable="False" />
+    <point id="PT_1" x="41" y="181" controllable="False" connectable="False" />
+    <point id="PT_2" x="41" y="181" controllable="False" connectable="False" />
+    <point id="PT_3" x="219" y="109" controllable="False" connectable="False" />
+    <point id="PT_4" x="218" y="109" controllable="False" connectable="False" />
+    <point id="PT_5" x="42" y="42" controllable="False" connectable="False" />
+    <point id="PT_6" x="0" y="71" controllable="False" connectable="True" />
+    <point id="PT_7" x="40" y="71" controllable="False" connectable="False" />
+    <point id="PT_8" x="41" y="152" controllable="False" connectable="False" />
+    <point id="PT_9" x="0" y="152" controllable="False" connectable="True" />
+    <point id="PT_10" x="218" y="109" controllable="False" connectable="False" />
+    <point id="PT_11" x="266" y="109" controllable="False" connectable="True" />
+    <point id="PT_12" x="128" y="0" controllable="False" connectable="True" />
+    <point id="PT_13" x="128" y="75" controllable="False" connectable="False" />
+    <point id="PT_14" x="129" y="145" controllable="False" connectable="False" />
+    <point id="PT_15" x="129" y="218" controllable="False" connectable="True" />
+  </points>
+  <drawings>
+    <line startPoint="PT_0" endPoint="PT_1" style="def" />
+    <line startPoint="PT_2" endPoint="PT_3" style="def" />
+    <line startPoint="PT_4" endPoint="PT_5" style="def" />
+    <line startPoint="PT_6" endPoint="PT_7" style="def" />
+    <line startPoint="PT_8" endPoint="PT_9" style="def" />
+    <line startPoint="PT_10" endPoint="PT_11" style="def" />
+    <line startPoint="PT_12" endPoint="PT_13" style="def" />
+    <line startPoint="PT_14" endPoint="PT_15" style="def" />
+  </drawings>
+  <fillings />
+  <styles>
+    <drawingStyle id="def" red="0" green="0" blue="0" width="1" style="solid" />
+  </styles>
+</graphicTemplate>

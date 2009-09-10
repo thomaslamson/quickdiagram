@@ -1,0 +1,41 @@
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\prsht.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\mshtml.idl";
+import "c:\program files\microsoft sdks\windows\v6.0a\include\dimm.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\mshtmhst.idl";
+import "c:\program files\microsoft sdks\windows\v6.0a\include\docobj.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\exdisp.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\objsafe.idl";
+
+[
+	object,
+	uuid(88869CCD-F59E-4985-B4D8-EAE83C0D0F67),
+	dual,
+	helpstring("IPrimitiveRecognition Interface"),
+	pointer_default(unique)
+] 
+#line 19 "e:\\test\\quickdiagram\\recognition\\primitiverecognition.h"
+interface IPrimitiveRecognition : IDispatch {
+#line 21 "e:\\test\\quickdiagram\\recognition\\primitiverecognition.h"
+	[id(1),helpstring("method LoadTemplates")] HRESULT  LoadTemplates([in] BSTR TemplatePath);
+	[id(2),helpstring("method RecognizePrimitive")] HRESULT  RecognizeObjects([in] BSTR strokeXML, [out,retval] BSTR *resultXML);
+};
+
+
+[ version(1.0), uuid(5D5D945F-D0C4-4E3C-8219-2F5DF88990EB), helpstring("Recognition 1.0 Type Library") ]
+library Recognition
+{
+	importlib("stdole2.tlb");
+	importlib("olepro32.dll");
+
+	[
+		version(1.0),
+		uuid(D8E8E148-F05C-4862-B6BC-A55C28E97F86),
+		helpstring("PrimitiveRecognition Class")
+	] 
+#line 38 "e:\\test\\quickdiagram\\recognition\\primitiverecognition.h"
+	coclass CPrimitiveRecognition {
+		interface IPrimitiveRecognition;
+	};
+
+}
+

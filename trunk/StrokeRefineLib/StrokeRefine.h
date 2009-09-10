@@ -1,0 +1,1 @@
+void RefineStrokes_MergeVertex(std::vector<PrimitiveStroke*> &rgStrokes, double DistanceThreshold);

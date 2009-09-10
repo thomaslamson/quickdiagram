@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<graphicTemplate id="VsourceAC" extScale="True" extRotate="True" extConnect="False" keepAspectRatio="True">
+  <points>
+    <point id="PT_0" x="0" y="1" controllable="False" connectable="False" />
+    <point id="PT_1" x="325" y="333" controllable="False" connectable="False" />
+    <point id="PT_2" x="162" y="333" controllable="False" connectable="False" />
+    <point id="PT_3" x="74" y="120" controllable="False" connectable="False" />
+    <point id="PT_4" x="165" y="211" controllable="False" connectable="False" />
+    <point id="PT_5" x="75" y="165" controllable="False" connectable="False" />
+    <point id="PT_6" x="165" y="169" controllable="False" connectable="False" />
+    <point id="PT_7" x="164" y="121" controllable="False" connectable="False" />
+    <point id="PT_8" x="255" y="212" controllable="False" connectable="False" />
+    <point id="PT_9" x="254" y="165" controllable="False" connectable="False" />
+    <point id="PT_10" x="325" y="164" controllable="True" connectable="True">
+      <onPositionChange editingMode="default" />
+    </point>
+    <point id="PT_11" x="0" y="164" controllable="True" connectable="True">
+      <onPositionChange editingMode="default" />
+    </point>
+    <point id="PT_12" x="159" y="0" controllable="True" connectable="True">
+      <onPositionChange editingMode="default" />
+    </point>
+    <point id="PT_13" x="160" y="334" controllable="True" connectable="True">
+      <onPositionChange editingMode="default" />
+    </point>
+  </points>
+  <drawings>
+    <arc leftTop="PT_0" rightDown="PT_1" startPoint="PT_2" endPoint="PT_2" style="def" />
+    <arc leftTop="PT_3" rightDown="PT_4" startPoint="PT_5" endPoint="PT_6" style="def" />
+    <arc leftTop="PT_7" rightDown="PT_8" startPoint="PT_9" endPoint="PT_6" style="def" />
+  </drawings>
+  <fillings />
+  <styles>
+    <drawingStyle id="def" red="0" green="0" blue="0" width="1" style="solid" />
+  </styles>
+</graphicTemplate>

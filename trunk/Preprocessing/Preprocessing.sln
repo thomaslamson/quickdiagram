@@ -1,0 +1,49 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Preprocessing", "Preprocessing.vcproj", "{B49078E9-37B0-4810-85FB-E66D67D5C0BD}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PreprocessingPS", "PreprocessingPS.vcproj", "{A9E3A779-2500-41DE-BC6E-A0FD0C3C96FB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B49078E9-37B0-4810-85FB-E66D67D5C0BD} = {B49078E9-37B0-4810-85FB-E66D67D5C0BD}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackerTest", "..\TrackerTest\TrackerTest.csproj", "{DE86479A-1804-4ACD-91BB-A1D080EDDCB4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A9E3A779-2500-41DE-BC6E-A0FD0C3C96FB} = {A9E3A779-2500-41DE-BC6E-A0FD0C3C96FB}
+		{B49078E9-37B0-4810-85FB-E66D67D5C0BD} = {B49078E9-37B0-4810-85FB-E66D67D5C0BD}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GOMLib", "..\GOMLib\GOMLib.csproj", "{98D5749E-3FA9-4BF3-83F6-53F2D53353B3}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
+		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{B49078E9-37B0-4810-85FB-E66D67D5C0BD}.Debug.ActiveCfg = Debug|Win32
+		{B49078E9-37B0-4810-85FB-E66D67D5C0BD}.Debug.Build.0 = Debug|Win32
+		{B49078E9-37B0-4810-85FB-E66D67D5C0BD}.Release.ActiveCfg = Release|Win32
+		{B49078E9-37B0-4810-85FB-E66D67D5C0BD}.Release.Build.0 = Release|Win32
+		{A9E3A779-2500-41DE-BC6E-A0FD0C3C96FB}.Debug.ActiveCfg = Debug|Win32
+		{A9E3A779-2500-41DE-BC6E-A0FD0C3C96FB}.Release.ActiveCfg = Release|Win32
+		{DE86479A-1804-4ACD-91BB-A1D080EDDCB4}.Debug.ActiveCfg = Debug|.NET
+		{DE86479A-1804-4ACD-91BB-A1D080EDDCB4}.Debug.Build.0 = Debug|.NET
+		{DE86479A-1804-4ACD-91BB-A1D080EDDCB4}.Release.ActiveCfg = Release|.NET
+		{DE86479A-1804-4ACD-91BB-A1D080EDDCB4}.Release.Build.0 = Release|.NET
+		{98D5749E-3FA9-4BF3-83F6-53F2D53353B3}.Debug.ActiveCfg = Debug|.NET
+		{98D5749E-3FA9-4BF3-83F6-53F2D53353B3}.Debug.Build.0 = Debug|.NET
+		{98D5749E-3FA9-4BF3-83F6-53F2D53353B3}.Release.ActiveCfg = Release|.NET
+		{98D5749E-3FA9-4BF3-83F6-53F2D53353B3}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

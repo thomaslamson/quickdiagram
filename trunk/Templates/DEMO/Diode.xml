@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<graphicTemplate id="Diode" extScale="True" extRotate="True" extConnect="False" keepAspectRatio="True">
+  <points>
+    <point id="PT_0" x="0" y="85" controllable="False" connectable="True" />
+    <point id="PT_1" x="277" y="85" controllable="False" connectable="True" />
+    <point id="PT_2" x="63" y="1" controllable="False" connectable="False" />
+    <point id="PT_3" x="63" y="168" controllable="False" connectable="False" />
+    <point id="PT_4" x="63" y="168" controllable="False" connectable="False" />
+    <point id="PT_5" x="231" y="84" controllable="False" connectable="False" />
+    <point id="PT_6" x="232" y="85" controllable="False" connectable="False" />
+    <point id="PT_7" x="63" y="0" controllable="False" connectable="False" />
+    <point id="PT_8" x="231" y="164" controllable="False" connectable="False" />
+    <point id="PT_9" x="231" y="1" controllable="False" connectable="False" />
+  </points>
+  <drawings>
+    <line startPoint="PT_0" endPoint="PT_1" style="def" />
+    <line startPoint="PT_2" endPoint="PT_3" style="def" />
+    <line startPoint="PT_4" endPoint="PT_5" style="def" />
+    <line startPoint="PT_6" endPoint="PT_7" style="def" />
+    <line startPoint="PT_8" endPoint="PT_9" style="def" />
+  </drawings>
+  <fillings />
+  <styles>
+    <drawingStyle id="def" red="0" green="0" blue="0" width="1" style="solid" />
+  </styles>
+</graphicTemplate>

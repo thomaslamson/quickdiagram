@@ -1,0 +1,42 @@
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\prsht.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\mshtml.idl";
+import "c:\program files\microsoft sdks\windows\v6.0a\include\dimm.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\mshtmhst.idl";
+import "c:\program files\microsoft sdks\windows\v6.0a\include\docobj.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\exdisp.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\objsafe.idl";
+
+[
+	object,
+	uuid(5E2C7AFC-8414-47B1-AC3A-F7A28D4DB45B),
+	dual,
+	helpstring("IStrokeRecognition Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\test\\quickdiagram\\preprocessing\\strokerecognition.h"
+interface IStrokeRecognition : IDispatch {
+#line 17 "e:\\test\\quickdiagram\\preprocessing\\strokerecognition.h"
+	[id(1),helpstring("method RecognizeStroke")] HRESULT  RecognizeStroke([in] BSTR MouseTrack, [out,retval] BSTR *StrokeResult);
+	[propget,id(2),helpstring("property RecognitionParam")] HRESULT  RecognitionParam([out,retval] BSTR *pVal);
+	[propput,id(2),helpstring("property RecognitionParam")] HRESULT  RecognitionParam([in] BSTR newVal);
+};
+
+
+[ version(1.0), uuid(E2D7C522-9A94-435F-8961-BE74E1A31199), helpstring("Preprocessing 1.0 Type Library") ]
+library Preprocessing
+{
+	importlib("stdole2.tlb");
+	importlib("olepro32.dll");
+
+	[
+		version(1.0),
+		uuid(E0454D4C-0289-40E6-A55C-FA5A6E4BD7D6),
+		helpstring("StrokeRecognition Class")
+	] 
+#line 35 "e:\\test\\quickdiagram\\preprocessing\\strokerecognition.h"
+	coclass CStrokeRecognition {
+		interface IStrokeRecognition;
+	};
+
+}
+
