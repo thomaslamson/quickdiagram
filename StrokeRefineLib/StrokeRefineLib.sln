@@ -1,0 +1,31 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StrokeRefineLib", "StrokeRefineLib.vcproj", "{2B720B6A-3BB8-489B-9242-E1D450B6F69A}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StrokeRefineLibPS", "StrokeRefineLibPS.vcproj", "{A2ACD4FA-F126-4DC6-9761-43E1AD6AC947}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2B720B6A-3BB8-489B-9242-E1D450B6F69A} = {2B720B6A-3BB8-489B-9242-E1D450B6F69A}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
+		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{2B720B6A-3BB8-489B-9242-E1D450B6F69A}.Debug.ActiveCfg = Debug|Win32
+		{2B720B6A-3BB8-489B-9242-E1D450B6F69A}.Debug.Build.0 = Debug|Win32
+		{2B720B6A-3BB8-489B-9242-E1D450B6F69A}.Release.ActiveCfg = Release|Win32
+		{2B720B6A-3BB8-489B-9242-E1D450B6F69A}.Release.Build.0 = Release|Win32
+		{A2ACD4FA-F126-4DC6-9761-43E1AD6AC947}.Debug.ActiveCfg = Debug|Win32
+		{A2ACD4FA-F126-4DC6-9761-43E1AD6AC947}.Release.ActiveCfg = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

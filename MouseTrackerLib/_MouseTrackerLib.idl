@@ -1,0 +1,45 @@
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\prsht.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\mshtml.idl";
+import "c:\program files\microsoft sdks\windows\v6.0a\include\dimm.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\mshtmhst.idl";
+import "c:\program files\microsoft sdks\windows\v6.0a\include\docobj.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\exdisp.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\objsafe.idl";
+
+[
+	object,
+	uuid(62881EF1-7089-40EE-A5F7-31FBD2F7BD70),
+	dual,
+	helpstring("ITracker Interface"),
+	pointer_default(unique)
+] 
+#line 15 "e:\\test\\quickdiagram\\mousetrackerlib\\tracker.h"
+interface ITracker : IDispatch {
+#line 17 "e:\\test\\quickdiagram\\mousetrackerlib\\tracker.h"
+	[id(1),helpstring("method StartTracker")] HRESULT  StartTracker([in] VARIANT_BOOL ClearPreviousTrack);
+	[id(2),helpstring("method StopTracker")] HRESULT  StopTracker();
+	[propget,id(3),helpstring("property IsTracking")] HRESULT  IsTracking([out,retval] VARIANT_BOOL *pVal);
+	[id(4),helpstring("method GetTrack_Raw")] HRESULT  GetTrack_Raw([in] LONGLONG hWnd, [out,retval] BSTR *TrackXML);
+	[id(5),helpstring("method GetTrack_No_Redundent")] HRESULT  GetTrack_No_Redundent([in] LONGLONG hWnd, [out,retval] BSTR *TrackXML);
+	[id(6),helpstring("method GetTrack_No_Collinear")] HRESULT  GetTrack_No_Collinear([in] LONGLONG hWnd, [in] DOUBLE CollinearThreshold, [out,retval] BSTR *TrackXML);
+};
+
+
+[ version(1.0), uuid(5E5E03A5-C762-407B-972A-0048D0CB4391), helpstring("MouseTrackerLib 1.0 Type Library") ]
+library MouseTrackerLib
+{
+	importlib("stdole2.tlb");
+	importlib("olepro32.dll");
+
+	[
+		version(1.0),
+		uuid(098069F8-F34C-44D6-93DA-7D64BD744381),
+		helpstring("Tracker Class")
+	] 
+#line 38 "e:\\test\\quickdiagram\\mousetrackerlib\\tracker.h"
+	coclass CTracker {
+		interface ITracker;
+	};
+
+}
+

@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<graphicTemplate id="Tube tetrode" extScale="True" extRotate="True" extConnect="True" keepAspectRatio="True">
+  <points>
+    <point id="PT_0" x="32" y="21" controllable="False" connectable="False" />
+    <point id="PT_1" x="198" y="187" controllable="False" connectable="False" />
+    <point id="PT_2" x="115" y="187" controllable="False" connectable="False" />
+    <point id="PT_3" x="112" y="0" controllable="False" connectable="True" />
+    <point id="PT_4" x="112" y="57" controllable="False" connectable="False" />
+    <point id="PT_5" x="68" y="57" controllable="False" connectable="False" />
+    <point id="PT_6" x="156" y="57" controllable="False" connectable="False" />
+    <point id="PT_13" x="91" y="185" controllable="False" connectable="False" />
+    <point id="PT_14" x="111" y="165" controllable="False" connectable="False" />
+    <point id="PT_15" x="112" y="166" controllable="False" connectable="False" />
+    <point id="PT_16" x="131" y="185" controllable="False" connectable="False" />
+    <point id="PT_17" x="91" y="183" controllable="False" connectable="False" />
+    <point id="PT_18" x="91" y="216" controllable="False" connectable="True" />
+    <point id="PT_19" x="131" y="185" controllable="False" connectable="False" />
+    <point id="PT_20" x="131" y="217" controllable="False" connectable="True" />
+    <point id="PT_21" x="0" y="98" controllable="False" connectable="True" />
+    <point id="PT_22" x="55" y="98" controllable="False" connectable="False" />
+    <point id="PT_23" x="160" y="76" controllable="False" connectable="False" />
+    <point id="PT_24" x="226" y="76" controllable="False" connectable="True" />
+    <point id="PT_25" x="70" y="76" controllable="False" connectable="False" />
+    <point id="PT_26" x="89" y="76" controllable="False" connectable="False" />
+    <point id="PT_27" x="100" y="76" controllable="False" connectable="False" />
+    <point id="PT_28" x="117" y="76" controllable="False" connectable="False" />
+    <point id="PT_29" x="127" y="76" controllable="False" connectable="False" />
+    <point id="PT_30" x="147" y="76" controllable="False" connectable="False" />
+    <point id="PT_31" x="71" y="97" controllable="False" connectable="False" />
+    <point id="PT_32" x="87" y="97" controllable="False" connectable="False" />
+    <point id="PT_33" x="100" y="96" controllable="False" connectable="False" />
+    <point id="PT_34" x="118" y="96" controllable="False" connectable="False" />
+    <point id="PT_35" x="128" y="97" controllable="False" connectable="False" />
+    <point id="PT_36" x="148" y="97" controllable="False" connectable="False" />
+  </points>
+  <drawings>
+    <arc leftTop="PT_0" rightDown="PT_1" startPoint="PT_2" endPoint="PT_2" style="def" />
+    <line startPoint="PT_3" endPoint="PT_4" style="def" />
+    <line startPoint="PT_5" endPoint="PT_6" style="sty1" />
+    <line startPoint="PT_13" endPoint="PT_14" style="def" />
+    <line startPoint="PT_15" endPoint="PT_16" style="def" />
+    <line startPoint="PT_17" endPoint="PT_18" style="def" />
+    <line startPoint="PT_19" endPoint="PT_20" style="def" />
+    <line startPoint="PT_21" endPoint="PT_22" style="def" />
+    <line startPoint="PT_23" endPoint="PT_24" style="def" />
+    <line startPoint="PT_25" endPoint="PT_26" style="def" />
+    <line startPoint="PT_27" endPoint="PT_28" style="def" />
+    <line startPoint="PT_29" endPoint="PT_30" style="def" />
+    <line startPoint="PT_31" endPoint="PT_32" style="def" />
+    <line startPoint="PT_33" endPoint="PT_34" style="def" />
+    <line startPoint="PT_35" endPoint="PT_36" style="def" />
+  </drawings>
+  <fillings />
+  <styles>
+    <drawingStyle id="def" red="0" green="0" blue="0" width="1" style="solid" />
+    <drawingStyle id="def" red="0" green="0" blue="0" width="1" style="solid" />
+    <drawingStyle id="sty0" red="0" green="0" blue="0" width="1" style="solid" />
+    <drawingStyle id="sty1" red="0" green="0" blue="0" width="1" style="solid" />
+  </styles>
+</graphicTemplate>

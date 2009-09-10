@@ -1,0 +1,41 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MouseTrackerLib", "MouseTrackerLib.vcproj", "{320F60E7-ACB4-47FD-87BE-6620F8AA6EC4}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MouseTrackerLibPS", "MouseTrackerLibPS.vcproj", "{BBCC6311-C945-4DD9-8292-727D76FD737B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{320F60E7-ACB4-47FD-87BE-6620F8AA6EC4} = {320F60E7-ACB4-47FD-87BE-6620F8AA6EC4}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrackerTest", "..\TrackerTest\TrackerTest.csproj", "{DE86479A-1804-4ACD-91BB-A1D080EDDCB4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BBCC6311-C945-4DD9-8292-727D76FD737B} = {BBCC6311-C945-4DD9-8292-727D76FD737B}
+		{320F60E7-ACB4-47FD-87BE-6620F8AA6EC4} = {320F60E7-ACB4-47FD-87BE-6620F8AA6EC4}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
+		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
+	EndGlobalSection
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{320F60E7-ACB4-47FD-87BE-6620F8AA6EC4}.Debug.ActiveCfg = Debug|Win32
+		{320F60E7-ACB4-47FD-87BE-6620F8AA6EC4}.Debug.Build.0 = Debug|Win32
+		{320F60E7-ACB4-47FD-87BE-6620F8AA6EC4}.Release.ActiveCfg = Release|Win32
+		{320F60E7-ACB4-47FD-87BE-6620F8AA6EC4}.Release.Build.0 = Release|Win32
+		{BBCC6311-C945-4DD9-8292-727D76FD737B}.Debug.ActiveCfg = Debug|Win32
+		{BBCC6311-C945-4DD9-8292-727D76FD737B}.Release.ActiveCfg = Release|Win32
+		{DE86479A-1804-4ACD-91BB-A1D080EDDCB4}.Debug.ActiveCfg = Debug|.NET
+		{DE86479A-1804-4ACD-91BB-A1D080EDDCB4}.Debug.Build.0 = Debug|.NET
+		{DE86479A-1804-4ACD-91BB-A1D080EDDCB4}.Release.ActiveCfg = Release|.NET
+		{DE86479A-1804-4ACD-91BB-A1D080EDDCB4}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

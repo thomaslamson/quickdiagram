@@ -1,0 +1,57 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LastOpenVersion>7.10.3077</LastOpenVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ReferencePath>D:\FYP\狡籹 -QD200405\QuickDiagram\EEDomain\bin\Debug\;D:\FYP\狡籹 -QD120405\QuickDiagram\EEDomain\bin\Debug\;D:\FYP\QD120405\QuickDiagram\EEDomain\bin\Debug\;D:\FYP\QD030405\QuickDiagram\EEDomain\bin\Debug\;D:\FYP\Source\EEDomain\EEDomain\bin\Debug\;D:\FYP\fyp_310305_1851pm\ConsoleApplication1\bin\Release\;D:\FYP\QD030405\QuickDiagram\EEDomain\bin\Release\</ReferencePath>
+    <CopyProjectDestinationFolder>
+    </CopyProjectDestinationFolder>
+    <CopyProjectUncPath>
+    </CopyProjectUncPath>
+    <CopyProjectOption>0</CopyProjectOption>
+    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectTrust>0</ProjectTrust>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <EnableASPDebugging>false</EnableASPDebugging>
+    <EnableASPXDebugging>false</EnableASPXDebugging>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <EnableSQLServerDebugging>false</EnableSQLServerDebugging>
+    <RemoteDebugEnabled>false</RemoteDebugEnabled>
+    <RemoteDebugMachine>
+    </RemoteDebugMachine>
+    <StartAction>Project</StartAction>
+    <StartArguments>
+    </StartArguments>
+    <StartPage>
+    </StartPage>
+    <StartProgram>
+    </StartProgram>
+    <StartURL>
+    </StartURL>
+    <StartWorkingDirectory>
+    </StartWorkingDirectory>
+    <StartWithIE>false</StartWithIE>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <EnableASPDebugging>false</EnableASPDebugging>
+    <EnableASPXDebugging>false</EnableASPXDebugging>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+    <EnableSQLServerDebugging>false</EnableSQLServerDebugging>
+    <RemoteDebugEnabled>false</RemoteDebugEnabled>
+    <RemoteDebugMachine>
+    </RemoteDebugMachine>
+    <StartAction>Project</StartAction>
+    <StartArguments>
+    </StartArguments>
+    <StartPage>
+    </StartPage>
+    <StartProgram>
+    </StartProgram>
+    <StartURL>
+    </StartURL>
+    <StartWorkingDirectory>
+    </StartWorkingDirectory>
+    <StartWithIE>false</StartWithIE>
+  </PropertyGroup>
+</Project>

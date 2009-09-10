@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EEDomain", "EEDomain.csproj", "{B3934031-ADAD-474E-9356-6D0472728121}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{B3934031-ADAD-474E-9356-6D0472728121}.Debug.ActiveCfg = Release|.NET
+		{B3934031-ADAD-474E-9356-6D0472728121}.Debug.Build.0 = Release|.NET
+		{B3934031-ADAD-474E-9356-6D0472728121}.Release.ActiveCfg = Release|.NET
+		{B3934031-ADAD-474E-9356-6D0472728121}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,40 @@
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\prsht.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\mshtml.idl";
+import "c:\program files\microsoft sdks\windows\v6.0a\include\dimm.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\mshtmhst.idl";
+import "c:\program files\microsoft sdks\windows\v6.0a\include\docobj.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\exdisp.idl";
+import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\objsafe.idl";
+
+[
+	object,
+	uuid(FDAE69D6-93E3-4815-9FB7-78457D9B7FED),
+	dual,
+	helpstring("IStrokeRefinement Interface"),
+	pointer_default(unique)
+] 
+#line 18 "e:\\test\\quickdiagram\\strokerefinelib\\strokerefinement.h"
+interface IStrokeRefinement : IDispatch {
+#line 20 "e:\\test\\quickdiagram\\strokerefinelib\\strokerefinement.h"
+	[id(1),helpstring("method Refine_MergeVertex")] HRESULT  Refine_MergeVertex([in] BSTR StrokeXML, [in] DOUBLE DistanceThreshold, [out,retval] BSTR *ResultXML);
+};
+
+
+[ version(1.0), uuid(AA605D00-E911-46C5-9FC6-7780C334F57F), helpstring("StrokeRefineLib 1.0 Type Library") ]
+library StrokeRefineLib
+{
+	importlib("stdole2.tlb");
+	importlib("olepro32.dll");
+
+	[
+		version(1.0),
+		uuid(1A512878-0A46-4EB9-9BED-7F902AF26A5F),
+		helpstring("StrokeRefinement Class")
+	] 
+#line 36 "e:\\test\\quickdiagram\\strokerefinelib\\strokerefinement.h"
+	coclass CStrokeRefinement {
+		interface IStrokeRefinement;
+	};
+
+}
+

@@ -1,0 +1,11 @@
+HKCR
+{
+	NoRemove AppID
+	{
+		'%APPID%' = s 'MouseTrackerLib'
+		'MouseTrackerLib.DLL'
+		{
+			val AppID = s '%APPID%'
+		}
+	}
+}

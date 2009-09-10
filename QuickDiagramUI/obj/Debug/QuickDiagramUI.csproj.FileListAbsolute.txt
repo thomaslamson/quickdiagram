@@ -1,0 +1,5 @@
+E:\test\QuickDiagram\QuickDiagramUI\obj\Debug\Interop.MouseTrackerLib.dll
+E:\test\QuickDiagram\QuickDiagramUI\obj\Debug\Interop.Preprocessing.dll
+E:\test\QuickDiagram\QuickDiagramUI\obj\Debug\Interop.Recognition.dll
+E:\test\QuickDiagram\QuickDiagramUI\obj\Debug\Interop.StrokeRefineLib.dll
+E:\test\QuickDiagram\QuickDiagramUI\obj\Debug\QuickDiagramUI.csproj.ResolveComReference.cache

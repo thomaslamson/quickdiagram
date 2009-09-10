@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<graphicTemplate id="VsourceDC" extScale="True" extRotate="True" extConnect="False" keepAspectRatio="True">
+  <points>
+    <point id="PT_0" x="0" y="50" controllable="False" connectable="False" />
+    <point id="PT_1" x="0" y="110" controllable="False" connectable="False" />
+    <point id="PT_2" x="41" y="0" controllable="False" connectable="False" />
+    <point id="PT_3" x="41" y="157" controllable="False" connectable="False" />
+    <point id="PT_4" x="0" y="81" controllable="False" connectable="True" />
+    <point id="PT_5" x="41" y="82" controllable="False" connectable="True" />
+  </points>
+  <drawings>
+    <line startPoint="PT_0" endPoint="PT_1" style="def" />
+    <line startPoint="PT_2" endPoint="PT_3" style="def" />
+  </drawings>
+  <fillings />
+  <styles>
+    <drawingStyle id="def" red="0" green="0" blue="0" width="1" style="solid" />
+  </styles>
+</graphicTemplate>
