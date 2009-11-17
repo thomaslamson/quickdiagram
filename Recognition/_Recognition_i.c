@@ -6,7 +6,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0500 */
-/* at Thu Sep 10 17:04:48 2009
+/* at Fri Nov 13 17:07:41 2009
  */
 /* Compiler settings for _Recognition.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)

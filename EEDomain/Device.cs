@@ -33,12 +33,12 @@ namespace EEDomain
 		}
 		public void SetName(string n)
 		{
-				name = n;
+			name = n;
 		}
 
 		public string GetName()
 		{
-				return name;
+			return name;
 		}
 
 		public void SetMinus(bool i)
@@ -118,19 +118,87 @@ namespace EEDomain
 		public int GetNodeCount()
 		{
 			return nodeCount;
-		}
-		
-		
-	}
+        }
+
+        #region chester
+        private string Qname;
+
+        public string GetMainValue()
+        {
+            if (this.GetType().ToString().Equals("EEDomain.JFET"))
+            {
+                return ((EEDomain.JFET)this).GetModalName().ToString();
+            }
+
+            if (this.GetType().ToString().Equals("EEDomain.Diode"))
+            {
+                return ((EEDomain.Diode)this).GetModalName().ToString();
+            }
+
+            if (this.GetType().ToString().Equals("EEDomain.Opamp"))
+            {
+                return ((EEDomain.Opamp)this).GetModalName().ToString();
+            }
+
+            if (this.GetType().ToString().Equals("EEDomain.VsourceDC"))
+            {
+                return ((EEDomain.VsourceDC)this).GetVoltage().ToString();
+            }
+
+            if (this.GetType().ToString().Equals("EEDomain.Csource"))
+            {
+                return ((EEDomain.Csource)this).GetCurrent().ToString();
+            }
+
+            if (this.GetType().ToString().Equals("EEDomain.VsourceAC"))
+            {
+                return ((EEDomain.VsourceAC)this).GetVoltage().ToString();
+            }
+
+            if (this.GetType().ToString().Equals("EEDomain.Resistor"))
+            {
+                return ((EEDomain.Resistor)this).GetResistance().ToString();
+            }
+
+            if (this.GetType().ToString().Equals("EEDomain.Capacitor"))
+            {
+                return ((EEDomain.Capacitor)this).GetCapacitance().ToString();
+            }
+
+            if (this.GetType().ToString().Equals("EEDomain.Inductor"))
+            {
+                return ((EEDomain.Inductor)this).GetInductance().ToString();
+            }
+
+            if (this.GetType().ToString().Equals("EEDomain.Transitor"))
+            {
+                return ((EEDomain.Transitor)this).GetModalName().ToString();
+            }
+            return "x";
+        }
+
+        public string GetQName()
+        {
+            return Qname;
+        }
+
+        public void SetQName(string n)
+        {
+            Qname = n;
+        }
+        #endregion
+
+    }
 
 	public class Resistor : Device
 	{	
 		private double resistance;
-		public Resistor(string id,string name)
-		{	SetName(name);
+		public Resistor(string id,string name, string qn)
+		{	
+            SetName(name);
+            SetQName(qn);
 			SetID(id);
 			SetResistance(5);
-			
 		}
 
 		public void SetResistance(double r)
@@ -156,9 +224,10 @@ namespace EEDomain
 	public class VsourceDC : Device
 	{	private double voltage;
 
-		public VsourceDC(string id, string name)
-		{	
+		public VsourceDC(string id, string name, string qn)
+		{
 			SetName(name);
+            SetQName(qn);
 			SetID(id);
 			SetVoltage(10);			
 		}
@@ -236,7 +305,7 @@ namespace EEDomain
 		{
 			SetName(name);
 			SetID(id);
-			//SetCapacitance(5.0);
+			SetCapacitance("8");
 			
 		}
 

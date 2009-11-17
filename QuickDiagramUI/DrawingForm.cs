@@ -15,12 +15,13 @@ namespace QuickDiagramUI
 		private FloatControlLib.SmartTagControl tagColor;
 		private FloatControlLib.SmartTagControl tagEdit;
 		private FloatControlLib.SmartTagControl tagLink;
-		private FloatControlLib.FishEye tagFishEye;
+        private FloatControlLib.FishEye tagFishEye;
+        private FloatControlLib.SmartTagControl tagInfo;
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
 		private System.ComponentModel.Container components = null;
-
+        
 		public DrawingForm(string templatePath)
 		{
 			//
@@ -61,6 +62,15 @@ namespace QuickDiagramUI
 			m_frmLink.Visible			= false;
 			m_frmLink.LinkStyleChanged	+= new LinkStyleChangedEvent(m_frmLink_LinkStyleChanged);
 			m_frmLink.RemoveLink		+= new RemoveLinkEvent(m_frmLink_RemoveLink);
+
+            //xxx new add
+            m_frmInfo = new InfoForm();
+            m_frmInfo.TopLevel = false;
+            m_frmInfo.FormBorderStyle = FormBorderStyle.None;
+            m_frmInfo.Visible = false;
+            m_frmInfo.DrawingInfoChanged += new DrawingInfoChanged(m_frmInfo_DrawingInfoChanged);
+            tagInfo.TagControl = m_frmInfo;
+           //end 
 
 			tagColor.TagControl	= m_frmColor;
 			tagEdit.TagControl	= m_frmEdit;
@@ -122,106 +132,123 @@ namespace QuickDiagramUI
 		/// </summary>
 		private void InitializeComponent()
 		{
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(DrawingForm));
-			this.plDraw = new System.Windows.Forms.Panel();
-			this.tagFishEye = new FloatControlLib.FishEye();
-			this.tagLink = new FloatControlLib.SmartTagControl();
-			this.tagEdit = new FloatControlLib.SmartTagControl();
-			this.tagColor = new FloatControlLib.SmartTagControl();
-			this.plDraw.SuspendLayout();
-			this.SuspendLayout();
-			// 
-			// plDraw
-			// 
-			this.plDraw.BackColor = System.Drawing.Color.White;
-			this.plDraw.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.plDraw.Controls.Add(this.tagFishEye);
-			this.plDraw.Controls.Add(this.tagLink);
-			this.plDraw.Controls.Add(this.tagEdit);
-			this.plDraw.Controls.Add(this.tagColor);
-			this.plDraw.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
-			this.plDraw.Location = new System.Drawing.Point(10, 9);
-			this.plDraw.Name = "plDraw";
-			this.plDraw.Size = new System.Drawing.Size(960, 646);
-			this.plDraw.TabIndex = 0;
-			this.plDraw.MouseUp += new System.Windows.Forms.MouseEventHandler(this.plDraw_MouseUp);
-			this.plDraw.Paint += new System.Windows.Forms.PaintEventHandler(this.plDraw_Paint);
-			this.plDraw.DoubleClick += new System.EventHandler(this.plDraw_DoubleClick);
-			this.plDraw.MouseMove += new System.Windows.Forms.MouseEventHandler(this.plDraw_MouseMove);
-			this.plDraw.MouseDown += new System.Windows.Forms.MouseEventHandler(this.plDraw_MouseDown);
-			// 
-			// tagFishEye
-			// 
-			this.tagFishEye.Caption = "";
-			this.tagFishEye.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
-			this.tagFishEye.ImageHeight = 33;
-			this.tagFishEye.LabelHeight = 18;
-			this.tagFishEye.LabelWidth = 64;
-			this.tagFishEye.Location = new System.Drawing.Point(80, 8);
-			this.tagFishEye.Name = "tagFishEye";
-			this.tagFishEye.SelectedIndex = -1;
-			this.tagFishEye.Size = new System.Drawing.Size(19, 19);
-			this.tagFishEye.TabIndex = 3;
-			this.tagFishEye.TagIcon = ((System.Drawing.Image)(resources.GetObject("tagFishEye.TagIcon")));
-			this.tagFishEye.Visible = false;
-			this.tagFishEye.FishEyeItemSelected += new FloatControlLib.FishEyeItemSelectedEvent(this.tagFishEye_FishEyeItemSelected);
-			// 
-			// tagLink
-			// 
-			this.tagLink.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
-			this.tagLink.Location = new System.Drawing.Point(56, 8);
-			this.tagLink.Name = "tagLink";
-			this.tagLink.Size = new System.Drawing.Size(19, 19);
-			this.tagLink.TabIndex = 2;
-			this.tagLink.TagControl = null;
-			this.tagLink.TagIcon = ((System.Drawing.Image)(resources.GetObject("tagLink.TagIcon")));
-			this.tagLink.TagWindowHeight = 405;
-			this.tagLink.TagWindowWidth = 240;
-			this.tagLink.Visible = false;
-			// 
-			// tagEdit
-			// 
-			this.tagEdit.BackColor = System.Drawing.SystemColors.Control;
-			this.tagEdit.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
-			this.tagEdit.Location = new System.Drawing.Point(32, 8);
-			this.tagEdit.Name = "tagEdit";
-			this.tagEdit.Size = new System.Drawing.Size(19, 19);
-			this.tagEdit.TabIndex = 1;
-			this.tagEdit.TagControl = null;
-			this.tagEdit.TagIcon = ((System.Drawing.Image)(resources.GetObject("tagEdit.TagIcon")));
-			this.tagEdit.TagWindowHeight = 240;
-			this.tagEdit.TagWindowWidth = 150;
-			this.tagEdit.Visible = false;
-			// 
-			// tagColor
-			// 
-			this.tagColor.BackColor = System.Drawing.SystemColors.Control;
-			this.tagColor.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
-			this.tagColor.Location = new System.Drawing.Point(8, 9);
-			this.tagColor.Name = "tagColor";
-			this.tagColor.Size = new System.Drawing.Size(19, 19);
-			this.tagColor.TabIndex = 0;
-			this.tagColor.TagControl = null;
-			this.tagColor.TagIcon = ((System.Drawing.Image)(resources.GetObject("tagColor.TagIcon")));
-			this.tagColor.TagWindowHeight = 400;
-			this.tagColor.TagWindowWidth = 230;
-			this.tagColor.Visible = false;
-			// 
-			// DrawingForm
-			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(6, 15);
-			this.AutoScroll = true;
-			this.AutoScrollMargin = new System.Drawing.Size(8, 8);
-			this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-			this.ClientSize = new System.Drawing.Size(500, 167);
-			this.Controls.Add(this.plDraw);
-			this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
-			this.Name = "DrawingForm";
-			this.Text = "DrawingForm";
-			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DrawingForm_KeyDown);
-			this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.DrawingForm_KeyUp);
-			this.plDraw.ResumeLayout(false);
-			this.ResumeLayout(false);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DrawingForm));
+            this.plDraw = new System.Windows.Forms.Panel();
+            this.tagFishEye = new FloatControlLib.FishEye();
+            this.tagLink = new FloatControlLib.SmartTagControl();
+            this.tagEdit = new FloatControlLib.SmartTagControl();
+            this.tagColor = new FloatControlLib.SmartTagControl();
+            this.tagInfo = new FloatControlLib.SmartTagControl();
+            this.plDraw.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // plDraw
+            // 
+            this.plDraw.BackColor = System.Drawing.Color.White;
+            this.plDraw.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.plDraw.Controls.Add(this.tagInfo);
+            this.plDraw.Controls.Add(this.tagFishEye);
+            this.plDraw.Controls.Add(this.tagLink);
+            this.plDraw.Controls.Add(this.tagEdit);
+            this.plDraw.Controls.Add(this.tagColor);
+            this.plDraw.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.plDraw.Location = new System.Drawing.Point(10, 9);
+            this.plDraw.Name = "plDraw";
+            this.plDraw.Size = new System.Drawing.Size(960, 646);
+            this.plDraw.TabIndex = 0;
+            this.plDraw.DoubleClick += new System.EventHandler(this.plDraw_DoubleClick);
+            this.plDraw.Paint += new System.Windows.Forms.PaintEventHandler(this.plDraw_Paint);
+            this.plDraw.MouseMove += new System.Windows.Forms.MouseEventHandler(this.plDraw_MouseMove);
+            this.plDraw.MouseDown += new System.Windows.Forms.MouseEventHandler(this.plDraw_MouseDown);
+            this.plDraw.MouseUp += new System.Windows.Forms.MouseEventHandler(this.plDraw_MouseUp);
+            // 
+            // tagFishEye
+            // 
+            this.tagFishEye.Caption = "";
+            this.tagFishEye.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tagFishEye.ImageHeight = 33;
+            this.tagFishEye.LabelHeight = 18;
+            this.tagFishEye.LabelWidth = 64;
+            this.tagFishEye.Location = new System.Drawing.Point(80, 8);
+            this.tagFishEye.Name = "tagFishEye";
+            this.tagFishEye.SelectedIndex = -1;
+            this.tagFishEye.Size = new System.Drawing.Size(19, 19);
+            this.tagFishEye.TabIndex = 3;
+            this.tagFishEye.TagIcon = ((System.Drawing.Image)(resources.GetObject("tagFishEye.TagIcon")));
+            this.tagFishEye.Visible = false;
+            this.tagFishEye.Load += new System.EventHandler(this.tagFishEye_Load);
+            this.tagFishEye.FishEyeItemSelected += new FloatControlLib.FishEyeItemSelectedEvent(this.tagFishEye_FishEyeItemSelected);
+            // 
+            // tagLink
+            // 
+            this.tagLink.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tagLink.Location = new System.Drawing.Point(56, 8);
+            this.tagLink.Name = "tagLink";
+            this.tagLink.Size = new System.Drawing.Size(19, 19);
+            this.tagLink.TabIndex = 2;
+            this.tagLink.TagControl = null;
+            this.tagLink.TagIcon = ((System.Drawing.Image)(resources.GetObject("tagLink.TagIcon")));
+            this.tagLink.TagWindowHeight = 405;
+            this.tagLink.TagWindowWidth = 240;
+            this.tagLink.Visible = false;
+            // 
+            // tagEdit
+            // 
+            this.tagEdit.BackColor = System.Drawing.SystemColors.Control;
+            this.tagEdit.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tagEdit.Location = new System.Drawing.Point(32, 8);
+            this.tagEdit.Name = "tagEdit";
+            this.tagEdit.Size = new System.Drawing.Size(19, 19);
+            this.tagEdit.TabIndex = 1;
+            this.tagEdit.TagControl = null;
+            this.tagEdit.TagIcon = ((System.Drawing.Image)(resources.GetObject("tagEdit.TagIcon")));
+            this.tagEdit.TagWindowHeight = 240;
+            this.tagEdit.TagWindowWidth = 150;
+            this.tagEdit.Visible = false;
+            // 
+            // tagColor
+            // 
+            this.tagColor.BackColor = System.Drawing.SystemColors.Control;
+            this.tagColor.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tagColor.Location = new System.Drawing.Point(8, 9);
+            this.tagColor.Name = "tagColor";
+            this.tagColor.Size = new System.Drawing.Size(19, 19);
+            this.tagColor.TabIndex = 0;
+            this.tagColor.TagControl = null;
+            this.tagColor.TagIcon = ((System.Drawing.Image)(resources.GetObject("tagColor.TagIcon")));
+            this.tagColor.TagWindowHeight = 400;
+            this.tagColor.TagWindowWidth = 230;
+            this.tagColor.Visible = false;
+            // 
+            // tagInfo
+            // 
+            this.tagInfo.BackColor = System.Drawing.SystemColors.Control;
+            this.tagInfo.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tagInfo.Location = new System.Drawing.Point(105, 9);
+            this.tagInfo.Name = "tagInfo";
+            this.tagInfo.Size = new System.Drawing.Size(19, 19);
+            this.tagInfo.TabIndex = 7;
+            this.tagInfo.TagControl = null;
+            this.tagInfo.TagIcon = ((System.Drawing.Image)(resources.GetObject("tagInfo.TagIcon")));
+            this.tagInfo.TagWindowHeight = 240;
+            this.tagInfo.TagWindowWidth = 180;
+            this.tagInfo.Visible = false;
+            // 
+            // DrawingForm
+            // 
+            this.AutoScaleBaseSize = new System.Drawing.Size(6, 15);
+            this.AutoScroll = true;
+            this.AutoScrollMargin = new System.Drawing.Size(8, 8);
+            this.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.ClientSize = new System.Drawing.Size(500, 167);
+            this.Controls.Add(this.plDraw);
+            this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Name = "DrawingForm";
+            this.Text = "DrawingForm";
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.DrawingForm_KeyUp);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DrawingForm_KeyDown);
+            this.plDraw.ResumeLayout(false);
+            this.ResumeLayout(false);
 
 		}
 		#endregion
@@ -242,6 +269,7 @@ namespace QuickDiagramUI
 		private ColorForm		m_frmColor;
 		private EditForm		m_frmEdit;
 		private LinkForm		m_frmLink;
+        private InfoForm        m_frmInfo;
 
 		private PreprocessQueue		m_preprocess;
 		private RecognitionQueue	m_recognition;
@@ -262,11 +290,16 @@ namespace QuickDiagramUI
 
 		private string						m_currentFileName = "QuickDiagram.xml";
 
+        //xxx new add
+        public EEDomain.ReadFromXml readXmls;
+        //end add
+
 		public event MouseMoveOnDrawingAreaEvent	MouseMoveOnDrawingArea;
 		public event RecognitionResultChangedEvent	RecognitionResultChanged;
 		public event RecognitionResultEvent			RecognitionResultStart;
 		public event RecognitionResultEvent			RecognitionResultEnd;
 		public event DrawingModeChangedEvent		DrawingModeChanged;
+
 
 		public UserStatus	status;
 		public string		RecognitionResult
@@ -386,6 +419,7 @@ namespace QuickDiagramUI
 							break;
 						}
 					}
+
 
 					plDraw.Cursor = cursor;
 
@@ -564,6 +598,8 @@ namespace QuickDiagramUI
 				primitive.rotation	= (float)rotation;
 */
 				m_rgObjects.Add(primitive);
+                //save to somewhere
+                //end
 
 				m_sketch = new GOMLib.GOM_Object_Sketch();
 				tagFishEye.ClearFishEyeItems();
@@ -1241,7 +1277,7 @@ namespace QuickDiagramUI
 			canvas.FillRectangle(System.Drawing.Brushes.White, 0, 0, m_bitmap.Width, m_bitmap.Height);
 
 			rgnSel = null;
-
+            DiagramConvertXml();
 			for (int i = 0; i < m_rgObjects.Count; i++)
 			{
 				if (m_selObjs.Contains(m_rgObjects[i]) && (status.Action != UserActions.Sketching))
@@ -1261,6 +1297,13 @@ namespace QuickDiagramUI
 					m_rgObjects[i].Draw(canvas, true);
 				}
 			}
+
+            //new add week10
+            if (readXmls != null)
+            {
+                readXmls.Show_info(canvas, m_rgObjects);
+            }
+            //end
 
 			for (int i = 0; i < m_rgLinks.Count; i++)
 			{
@@ -1286,6 +1329,7 @@ namespace QuickDiagramUI
 				tagLink.Visible = true;
 
 				m_frmLink.SelectedLink = m_selectedLink;
+             
 /*
 				PointF	pt;
 
@@ -1349,6 +1393,10 @@ namespace QuickDiagramUI
 					{
 						bColorTagVisible			= true;
 						m_frmColor.SelectedObject	= (GOMLib.GOM_Object_Primitive)obj;
+                        //new add at 10/10/2009
+                        m_frmInfo.setXmls(readXmls);
+                        m_frmInfo.SelectedObject = (GOMLib.GOM_Object_Primitive)obj;
+                        //end
 					}
 				}
 				else if (m_selObjs.Count > 1)
@@ -1405,8 +1453,20 @@ namespace QuickDiagramUI
 			{
 				tagEdit.Left	= tagX;
 				tagEdit.Top		= tagY;
+
+
+                tagX += 19;
 			}
 			tagEdit.Visible = bEditTagVisible;
+
+            //new add at 4/10/2009
+            if (bColorTagVisible)
+            {
+                tagInfo.Left = tagX;
+                tagInfo.Top = tagY;
+            }
+            tagInfo.Visible = bColorTagVisible;
+            //end  
 
 			canvas.DrawRectangle(m_selectingPen, m_selectingRect);
 
@@ -1648,6 +1708,29 @@ namespace QuickDiagramUI
 		{
 			DrawObjectsOnCanvas();
 		}
+
+        // xxx new add
+        private void m_frmInfo_DrawingInfoChanged()
+        {
+            DrawObjectsOnCanvas();
+        }
+
+        //Convert the current Diagram to ReadFromXml type
+        public void DiagramConvertXml()
+        {
+            EEDomain.ReadFromXml bak_xml = readXmls;
+            GOMLib.GOM_Diagram diagram = new GOMLib.GOM_Diagram(m_rgObjects, m_rgLinks);
+            System.IO.StringWriter stringWriter = new System.IO.StringWriter();
+            System.Xml.XmlTextWriter xmltextWriter = new System.Xml.XmlTextWriter(stringWriter);
+            diagram.SaveToXML(xmltextWriter);
+            string diagramString = stringWriter.ToString();
+            readXmls = new EEDomain.ReadFromXml(diagramString, true);
+            if (bak_xml != null)
+            {
+                readXmls.SynDeviceList(bak_xml);
+            }
+        }
+        //end
 
 		private void DrawingForm_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
 		{
@@ -2259,6 +2342,11 @@ namespace QuickDiagramUI
 			}
 			return ret;
 		}
+
+        private void tagFishEye_Load(object sender, EventArgs e)
+        {
+
+        }
 
 	}
 

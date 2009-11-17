@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Xml;
+using System.Drawing;
 
 namespace EEDomain
 {
@@ -209,8 +210,8 @@ namespace EEDomain
 			{
 				if(startNode.GetName()!=null && endNode.GetName()!=null)
 				{	//Console.WriteLine("this is Resistor's equation");
-					//string equation = "V" + startNode.GetName() + " - " + "V" + endNode.GetName() + " = " + "I" + device.GetName() +"*"+ ((Resistor)device).GetResistance();
-					string equation = "V" + startNode.GetName() + " - " + "V" + endNode.GetName() + " = " + "-I" + device.GetName() +"*"+ ((Resistor)device).GetResistance();
+					//string equation = "V" + startNode.GetName() + " - " + "V" + endNode.GetName() + " = " + "I" +  device.GetQName() +"*"+ ((Resistor)device).GetResistance();
+					string equation = "V" + startNode.GetName() + " - " + "V" + endNode.GetName() + " = " + "-" + device.GetQName() +"*"+ ((Resistor)device).GetResistance();
 					
 					return(equation);
 				}
@@ -253,17 +254,17 @@ namespace EEDomain
 					return null;
 				else if(equation.Equals(""))
 				{
-					equation = "I"+ device.GetName();
+					equation = ""+ device.GetQName();
 				}
 				else
 				{
 					if(device.GetMinus()==true)
 					{	
-						equation = equation + " - " +"I"+ device.GetName();
+						equation = equation + " - " +""+ device.GetQName();
 					}
 					else
 					{
-						equation = equation + " + " +"I"+ device.GetName();
+						equation = equation + " + " +""+ device.GetQName();
 					}
 				}
 				
@@ -286,9 +287,8 @@ namespace EEDomain
 		private string		template;
 
 		
-		public ReadFromXml(string openpath)
+		public ReadFromXml(string instr, Boolean inputtype)
 		{	
-			string filepath = openpath;
 			string sOID = ""; //start object id
 			string sPID = ""; //start point id
 			string eOID = ""; //end object id
@@ -300,11 +300,22 @@ namespace EEDomain
 				
 			Node a = new Node("123","789"); //dummy
 			cnList.Add(a);
-					
+
 			//Create XML DOM instance
 			XmlDocument document = new XmlDocument();
-			document.Load(filepath);
-			
+
+            //chester
+            //true if load from string, false if load from xml file
+            if (inputtype == true)
+            {
+                document.LoadXml(instr);
+            }
+            else
+            {
+                document.Load(instr);
+            }
+            //end new add
+
 			//Select all graphic object elements and connections
 			XmlNodeList objList1 = document.SelectNodes("//graphicObject");
 			XmlNodeList objList2 = document.SelectNodes("//connection");
@@ -341,17 +352,15 @@ namespace EEDomain
 							switch ( template )	// typecast to specific type of device.
 							{	
 								case "Resistor" :
-									device = (Resistor) new Resistor(objID,""+countDevice);
-									//device = (Resistor) new Resistor(objID,""+countResistor);
-									//countResistor++;
-									countDevice++;
+                                    device = (Resistor)new Resistor(objID, "" + countDevice,"Resistor" + countResistor);    //chester
+                                    countDevice++;
+                                    countResistor++;
 									break;
 									
 								case "VsourceDC" :
-									device = (VsourceDC) new VsourceDC(objID,""+countDevice);
-									//device = (VsourceDC) new VsourceDC(objID,""+countVDC);
-									//countVDC++;
+                                    device = (VsourceDC)new VsourceDC(objID, ""+countDevice, "VsourceDC" + countVDC);       //chester
 									countDevice++;
+                                    countVDC++;
 									break;
 								
 								case "Inductor" :
@@ -587,12 +596,153 @@ namespace EEDomain
 		public ArrayList getConnectionList()
 		{
 			return(ccList);
-		}
+        }
 
-		
-	}
-	
-	
-	
+        #region Chester
+        //Syn two different RedFromXml when their device had same id
+        public void SynDeviceList(ReadFromXml temp_xml)
+        {
+            for (int i = 0; i < cdList.Count; i++)
+            {
+                syndevice(temp_xml.cdList, cdList, i);
+            }
+        }
+
+        private void syndevice(ArrayList telist, ArrayList cdlist, int i)
+        {
+            IEnumerator ien = telist.GetEnumerator();
+            EEDomain.Device odevice = ((EEDomain.Device)(cdlist[i]));
+            while (ien.MoveNext())
+            {
+                if (((EEDomain.Device)ien.Current).GetID().ToString() == odevice.GetID().ToString())
+                {
+                    odevice.SetQName(((EEDomain.Device)ien.Current).GetQName());
+                    if (((EEDomain.Device)ien.Current).GetType().ToString().Equals("EEDomain.JFET"))
+                    {
+                        //((EEDomain.JFET)dEnum.Current).SetModalName(this.objectAttribute.J3);
+                    }
+                    if (((EEDomain.Device)ien.Current).GetType().ToString().Equals("EEDomain.Diode"))
+                    {
+                        //((EEDomain.Diode)dEnum.Current).SetModalName(this.objectAttribute.D3);
+                    }
+                    if (((EEDomain.Device)ien.Current).GetType().ToString().Equals("EEDomain.Opamp"))
+                    {
+                        // ((EEDomain.Opamp)dEnum.Current).SetModalName(this.objectAttribute.X3);
+                    }
+
+                    if (((EEDomain.Device)ien.Current).GetType().ToString().Equals("EEDomain.VsourceDC"))
+                    {
+                        ((EEDomain.VsourceDC)odevice).SetVoltage(((EEDomain.VsourceDC)ien.Current).GetVoltage());
+                    }
+                    if (((EEDomain.Device)ien.Current).GetType().ToString().Equals("EEDomain.Csource"))
+                    {
+                        //  ((EEDomain.Csource)dEnum.Current).SetCurrent(this.objectAttribute.Csource1);
+                    }
+
+                    if (((EEDomain.Device)ien.Current).GetType().ToString().Equals("EEDomain.VsourceAC"))
+                    {
+                        //  ((EEDomain.VsourceAC)dEnum.Current).SetVoltage(this.objectAttribute.VacValue1);
+                    }
+
+                    if (((EEDomain.Device)ien.Current).GetType().ToString().Equals("EEDomain.Resistor"))
+                    {
+                        ((EEDomain.Resistor)odevice).SetResistance(((EEDomain.Resistor)ien.Current).GetResistance());
+                    }
+                    if (((EEDomain.Device)ien.Current).GetType().ToString().Equals("EEDomain.Capacitor"))
+                    {
+                        //((EEDomain.Capacitor)dEnum.Current).SetCapacitance(this.objectAttribute.C1);
+                    }
+                    if (((EEDomain.Device)ien.Current).GetType().ToString().Equals("EEDomain.Inductor"))
+                    {
+                        //((EEDomain.Inductor)dEnum.Current).SetInductance(this.objectAttribute.L5);
+                    }
+                    if (((EEDomain.Device)ien.Current).GetType().ToString().Equals("EEDomain.Transitor"))
+                    {
+                        //((EEDomain.Transitor)dEnum.Current).SetModalName(this.objectAttribute.T5);
+                    }
+                }
+                cdlist[i] = odevice;
+            }
+        }
+
+        //show the label of each node
+        public void Circuit_DiagramShowLabel(Graphics canvas, ReadFromXml readXmls, GOMLib.GOM_Links m_rgLinks)
+        {
+            ArrayList templist = readXmls.getConnectionList();
+            IEnumerator enumtmp = templist.GetEnumerator();
+
+            Font myFont = new Font("Times New Roman", 10);
+            RectangleF m_boundingBox = new System.Drawing.RectangleF(0, 0, 10, 10);
+            System.Drawing.Drawing2D.LinearGradientBrush myBrush = new System.Drawing.Drawing2D.LinearGradientBrush(m_boundingBox, Color.Black, Color.Black, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
+
+            while (enumtmp.MoveNext())
+            {
+                EEDomain.Node snode = ((EEDomain.Connection)enumtmp.Current).GetStart();
+                EEDomain.Node enode = ((EEDomain.Connection)enumtmp.Current).GetEnd();
+                for (int i = 0; i < m_rgLinks.Count; i++)
+                {
+                    if (snode.GetPtID() == m_rgLinks[i].m_startPt.id && enode.GetPtID() == m_rgLinks[i].m_endPt.id)
+                    {
+                        int sx, sy, ex, ey;
+                        sx = (int)m_rgLinks[i].m_startObj.xOffset + (int)m_rgLinks[i].m_startPt.x;
+                        sy = (int)m_rgLinks[i].m_startObj.yOffset + (int)m_rgLinks[i].m_startPt.y - 30;
+                        ex = (int)m_rgLinks[i].m_endObj.xOffset + (int)m_rgLinks[i].m_endPt.x;
+                        ey = (int)m_rgLinks[i].m_endObj.yOffset + (int)m_rgLinks[i].m_endPt.y - 30;
+
+                        canvas.DrawString("V" + snode.GetName(), myFont, myBrush, sx, sy);
+                        canvas.DrawString("V" + enode.GetName(), myFont, myBrush, ex, ey);
+                        break;
+                    }
+                }
+            }
+        }
+
+        //show the name of device and info in diagram
+        public void Show_info(Graphics canvas, GOMLib.GOM_Objects m_rgObjects)
+        {
+            ArrayList templist = getDeviceList();
+            IEnumerator enumtmp = templist.GetEnumerator();
+
+            Font myFont = new Font("Times New Roman", 10);
+            RectangleF m_boundingBox = new System.Drawing.RectangleF(0, 0, 10, 10);
+            System.Drawing.Drawing2D.LinearGradientBrush myBrush = new System.Drawing.Drawing2D.LinearGradientBrush(m_boundingBox, Color.Black, Color.Black, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
+
+            while (enumtmp.MoveNext())
+            {
+                for (int i = 0; i < m_rgObjects.Count; i++)
+                {
+                    string tname, tvalue;
+                    if (m_rgObjects[i].id.ToString() == ((EEDomain.Device)enumtmp.Current).GetID().ToString())
+                    {
+                        try
+                        {
+                            tname = ((EEDomain.Device)enumtmp.Current).GetQName();
+                            if (tname == null)
+                            {
+                                tname = "D" + ((EEDomain.Device)enumtmp.Current).GetName();
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            tname = "D" + ((EEDomain.Device)enumtmp.Current).GetName();
+                        }
+
+                        try
+                        {
+                            tvalue = ((EEDomain.Device)enumtmp.Current).GetMainValue();
+                        }
+                        catch(Exception)
+                        {
+                            tvalue = "x";
+                        }
+
+                        canvas.DrawString(tname + " = " + tvalue, myFont, myBrush, m_rgObjects[i].xOffset - 5, m_rgObjects[i].yOffset -20);
+                        break;
+                    }
+                }
+            }
+        }
+        #endregion
+    }
 	
 }

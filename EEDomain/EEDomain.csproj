@@ -74,10 +74,10 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bluebit.MatrixLibrary">
-      <Name>Bluebit.MatrixLibrary</Name>
+    <Reference Include="Accessibility" />
+    <Reference Include="Bluebit.MatrixLibrary, Version=4.3.32.0, Culture=neutral, PublicKeyToken=c915370950fbbd9f, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Bluebit.MatrixLibrary.dll</HintPath>
-      <AssemblyFolderKey>hklm\dn\net matrix library</AssemblyFolderKey>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -85,6 +85,7 @@
     <Reference Include="System.Data">
       <Name>System.Data</Name>
     </Reference>
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
@@ -112,6 +113,12 @@
     <Compile Include="Structure.cs">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GOMLib\GOMLib.csproj">
+      <Project>{98D5749E-3FA9-4BF3-83F6-53F2D53353B3}</Project>
+      <Name>GOMLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
