@@ -13,9 +13,9 @@ import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\objsafe.idl";
 	helpstring("IStrokeRecognition Interface"),
 	pointer_default(unique)
 ] 
-#line 15 "e:\\test\\quickdiagram\\preprocessing\\strokerecognition.h"
+#line 15 "d:\\new folder\\qd_new\\preprocessing\\strokerecognition.h"
 interface IStrokeRecognition : IDispatch {
-#line 17 "e:\\test\\quickdiagram\\preprocessing\\strokerecognition.h"
+#line 17 "d:\\new folder\\qd_new\\preprocessing\\strokerecognition.h"
 	[id(1),helpstring("method RecognizeStroke")] HRESULT  RecognizeStroke([in] BSTR MouseTrack, [out,retval] BSTR *StrokeResult);
 	[propget,id(2),helpstring("property RecognitionParam")] HRESULT  RecognitionParam([out,retval] BSTR *pVal);
 	[propput,id(2),helpstring("property RecognitionParam")] HRESULT  RecognitionParam([in] BSTR newVal);
@@ -33,7 +33,7 @@ library Preprocessing
 		uuid(E0454D4C-0289-40E6-A55C-FA5A6E4BD7D6),
 		helpstring("StrokeRecognition Class")
 	] 
-#line 35 "e:\\test\\quickdiagram\\preprocessing\\strokerecognition.h"
+#line 35 "d:\\new folder\\qd_new\\preprocessing\\strokerecognition.h"
 	coclass CStrokeRecognition {
 		interface IStrokeRecognition;
 	};

@@ -116,350 +116,374 @@ namespace QuickDiagramUI
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(MainForm));
-			this.muMain = new System.Windows.Forms.MainMenu();
-			this.menuItem1 = new System.Windows.Forms.MenuItem();
-			this.menuItem2 = new System.Windows.Forms.MenuItem();
-			this.menuItem3 = new System.Windows.Forms.MenuItem();
-			this.menuItem4 = new System.Windows.Forms.MenuItem();
-			this.menuItem5 = new System.Windows.Forms.MenuItem();
-			this.menuItem6 = new System.Windows.Forms.MenuItem();
-			this.menuItem7 = new System.Windows.Forms.MenuItem();
-			this.menuItem8 = new System.Windows.Forms.MenuItem();
-			this.menuItem9 = new System.Windows.Forms.MenuItem();
-			this.menuItem10 = new System.Windows.Forms.MenuItem();
-			this.menuItem12 = new System.Windows.Forms.MenuItem();
-			this.menuItem13 = new System.Windows.Forms.MenuItem();
-			this.menuItem11 = new System.Windows.Forms.MenuItem();
-			this.menuItem14 = new System.Windows.Forms.MenuItem();
-			this.menuItem15 = new System.Windows.Forms.MenuItem();
-			this.menuItem16 = new System.Windows.Forms.MenuItem();
-			this.menuItem17 = new System.Windows.Forms.MenuItem();
-			this.menuItem18 = new System.Windows.Forms.MenuItem();
-			this.tbMain = new System.Windows.Forms.ToolBar();
-			this.tbbNew = new System.Windows.Forms.ToolBarButton();
-			this.tbbOpen = new System.Windows.Forms.ToolBarButton();
-			this.tbbSave = new System.Windows.Forms.ToolBarButton();
-			this.tbSep1 = new System.Windows.Forms.ToolBarButton();
-			this.tbbCut = new System.Windows.Forms.ToolBarButton();
-			this.tbbCopy = new System.Windows.Forms.ToolBarButton();
-			this.tbbPaste = new System.Windows.Forms.ToolBarButton();
-			this.tbbDelete = new System.Windows.Forms.ToolBarButton();
-			this.tbSep2 = new System.Windows.Forms.ToolBarButton();
-			this.tbbRedo = new System.Windows.Forms.ToolBarButton();
-			this.tbbUndo = new System.Windows.Forms.ToolBarButton();
-			this.tbSep3 = new System.Windows.Forms.ToolBarButton();
-			this.imgsToolbar = new System.Windows.Forms.ImageList(this.components);
-			this.sbMain = new System.Windows.Forms.StatusBar();
-			this.sbpStatus = new System.Windows.Forms.StatusBarPanel();
-			this.sbpPosition = new System.Windows.Forms.StatusBarPanel();
-			this.fbMain = new FloatControlLib.FloatBar();
-			this.dcMain = new FloatControlLib.DockControl();
-			this.spMain = new System.Windows.Forms.Splitter();
-			this.imgsToolbox = new System.Windows.Forms.ImageList(this.components);
-			this.saveFileDlg = new System.Windows.Forms.SaveFileDialog();
-			this.openFileDlg = new System.Windows.Forms.OpenFileDialog();
-			((System.ComponentModel.ISupportInitialize)(this.sbpStatus)).BeginInit();
-			((System.ComponentModel.ISupportInitialize)(this.sbpPosition)).BeginInit();
-			this.SuspendLayout();
-			// 
-			// muMain
-			// 
-			this.muMain.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																				   this.menuItem1,
-																				   this.menuItem10,
-																				   this.menuItem11,
-																				   this.menuItem16});
-			// 
-			// menuItem1
-			// 
-			this.menuItem1.Index = 0;
-			this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																					  this.menuItem2,
-																					  this.menuItem3,
-																					  this.menuItem4,
-																					  this.menuItem5,
-																					  this.menuItem6,
-																					  this.menuItem7,
-																					  this.menuItem8,
-																					  this.menuItem9});
-			this.menuItem1.Text = "&File";
-			// 
-			// menuItem2
-			// 
-			this.menuItem2.Index = 0;
-			this.menuItem2.Text = "&New Diagram";
-			this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
-			// 
-			// menuItem3
-			// 
-			this.menuItem3.Index = 1;
-			this.menuItem3.Text = "&Open Diagram";
-			this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
-			// 
-			// menuItem4
-			// 
-			this.menuItem4.Index = 2;
-			this.menuItem4.Text = "&Close Diagram";
-			// 
-			// menuItem5
-			// 
-			this.menuItem5.Index = 3;
-			this.menuItem5.Text = "-";
-			// 
-			// menuItem6
-			// 
-			this.menuItem6.Index = 4;
-			this.menuItem6.Text = "&Save Diagram";
-			this.menuItem6.Click += new System.EventHandler(this.menuItem6_Click);
-			// 
-			// menuItem7
-			// 
-			this.menuItem7.Index = 5;
-			this.menuItem7.Text = "Save Diagram &as";
-			this.menuItem7.Click += new System.EventHandler(this.menuItem7_Click);
-			// 
-			// menuItem8
-			// 
-			this.menuItem8.Index = 6;
-			this.menuItem8.Text = "-";
-			// 
-			// menuItem9
-			// 
-			this.menuItem9.Index = 7;
-			this.menuItem9.Text = "E&xit";
-			this.menuItem9.Click += new System.EventHandler(this.menuItem9_Click);
-			// 
-			// menuItem10
-			// 
-			this.menuItem10.Index = 1;
-			this.menuItem10.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																					   this.menuItem12,
-																					   this.menuItem13});
-			this.menuItem10.Text = "Input";
-			this.menuItem10.Click += new System.EventHandler(this.menuItem10_Click);
-			// 
-			// menuItem12
-			// 
-			this.menuItem12.Index = 0;
-			this.menuItem12.Text = "Diagram";
-			this.menuItem12.Click += new System.EventHandler(this.menuItem12_Click);
-			// 
-			// menuItem13
-			// 
-			this.menuItem13.Index = 1;
-			this.menuItem13.Text = "Value";
-			this.menuItem13.Click += new System.EventHandler(this.menuItem13_Click);
-			// 
-			// menuItem11
-			// 
-			this.menuItem11.Index = 2;
-			this.menuItem11.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																					   this.menuItem14,
-																					   this.menuItem15});
-			this.menuItem11.Text = "Simulation";
-			// 
-			// menuItem14
-			// 
-			this.menuItem14.Index = 0;
-			this.menuItem14.Text = "List Equation";
-			this.menuItem14.Click += new System.EventHandler(this.menuItem14_Click);
-			// 
-			// menuItem15
-			// 
-			this.menuItem15.Index = 1;
-			this.menuItem15.Text = "Solve Unknown";
-			this.menuItem15.Click += new System.EventHandler(this.menuItem15_Click);
-			// 
-			// menuItem16
-			// 
-			this.menuItem16.Index = 3;
-			this.menuItem16.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-																					   this.menuItem17,
-																					   this.menuItem18});
-			this.menuItem16.Text = "Generation";
-			// 
-			// menuItem17
-			// 
-			this.menuItem17.Index = 0;
-			this.menuItem17.Text = "Display Pspice Code";
-			this.menuItem17.Click += new System.EventHandler(this.menuItem17_Click);
-			// 
-			// menuItem18
-			// 
-			this.menuItem18.Index = 1;
-			this.menuItem18.Text = "Save Pspice Code";
-			// 
-			// tbMain
-			// 
-			this.tbMain.Appearance = System.Windows.Forms.ToolBarAppearance.Flat;
-			this.tbMain.Buttons.AddRange(new System.Windows.Forms.ToolBarButton[] {
-																					  this.tbbNew,
-																					  this.tbbOpen,
-																					  this.tbbSave,
-																					  this.tbSep1,
-																					  this.tbbCut,
-																					  this.tbbCopy,
-																					  this.tbbPaste,
-																					  this.tbbDelete,
-																					  this.tbSep2,
-																					  this.tbbRedo,
-																					  this.tbbUndo,
-																					  this.tbSep3});
-			this.tbMain.ButtonSize = new System.Drawing.Size(16, 16);
-			this.tbMain.DropDownArrows = true;
-			this.tbMain.ImageList = this.imgsToolbar;
-			this.tbMain.Location = new System.Drawing.Point(0, 0);
-			this.tbMain.Name = "tbMain";
-			this.tbMain.ShowToolTips = true;
-			this.tbMain.Size = new System.Drawing.Size(806, 28);
-			this.tbMain.TabIndex = 0;
-			this.tbMain.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.tbMain_ButtonClick);
-			// 
-			// tbbNew
-			// 
-			this.tbbNew.ImageIndex = 0;
-			// 
-			// tbbOpen
-			// 
-			this.tbbOpen.ImageIndex = 1;
-			// 
-			// tbbSave
-			// 
-			this.tbbSave.ImageIndex = 2;
-			// 
-			// tbSep1
-			// 
-			this.tbSep1.Style = System.Windows.Forms.ToolBarButtonStyle.Separator;
-			// 
-			// tbbCut
-			// 
-			this.tbbCut.ImageIndex = 5;
-			// 
-			// tbbCopy
-			// 
-			this.tbbCopy.ImageIndex = 6;
-			// 
-			// tbbPaste
-			// 
-			this.tbbPaste.ImageIndex = 7;
-			// 
-			// tbbDelete
-			// 
-			this.tbbDelete.ImageIndex = 8;
-			// 
-			// tbSep2
-			// 
-			this.tbSep2.Style = System.Windows.Forms.ToolBarButtonStyle.Separator;
-			// 
-			// tbbRedo
-			// 
-			this.tbbRedo.ImageIndex = 4;
-			// 
-			// tbbUndo
-			// 
-			this.tbbUndo.ImageIndex = 3;
-			// 
-			// tbSep3
-			// 
-			this.tbSep3.Style = System.Windows.Forms.ToolBarButtonStyle.Separator;
-			// 
-			// imgsToolbar
-			// 
-			this.imgsToolbar.ImageSize = new System.Drawing.Size(16, 16);
-			this.imgsToolbar.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgsToolbar.ImageStream")));
-			this.imgsToolbar.TransparentColor = System.Drawing.Color.Transparent;
-			// 
-			// sbMain
-			// 
-			this.sbMain.Location = new System.Drawing.Point(0, 414);
-			this.sbMain.Name = "sbMain";
-			this.sbMain.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
-																					  this.sbpStatus,
-																					  this.sbpPosition});
-			this.sbMain.ShowPanels = true;
-			this.sbMain.Size = new System.Drawing.Size(806, 23);
-			this.sbMain.TabIndex = 1;
-			this.sbMain.SizeChanged += new System.EventHandler(this.sbMain_SizeChanged);
-			// 
-			// sbpPosition
-			// 
-			this.sbpPosition.Alignment = System.Windows.Forms.HorizontalAlignment.Center;
-			// 
-			// fbMain
-			// 
-			this.fbMain.BackColor = System.Drawing.SystemColors.ControlLightLight;
-			this.fbMain.Dock = System.Windows.Forms.DockStyle.Left;
-			this.fbMain.DockPadding.Bottom = 2;
-			this.fbMain.DockPadding.Left = 2;
-			this.fbMain.DockPadding.Right = 3;
-			this.fbMain.DockPadding.Top = 2;
-			this.fbMain.Location = new System.Drawing.Point(0, 28);
-			this.fbMain.Name = "fbMain";
-			this.fbMain.Size = new System.Drawing.Size(30, 386);
-			this.fbMain.TabIndex = 2;
-			this.fbMain.FloatItemDocking += new FloatControlLib.FloatItemDockingEvent(this.fbMain_FloatItemDocking);
-			this.fbMain.FloatItemClosing += new FloatControlLib.FloatItemClosingEvent(this.fbMain_FloatItemClosing);
-			this.fbMain.FloatWindowHiding += new FloatControlLib.FloatWindowHidingEvent(this.fbMain_FloatWindowHiding);
-			// 
-			// dcMain
-			// 
-			this.dcMain.Dock = System.Windows.Forms.DockStyle.Left;
-			this.dcMain.DockPadding.All = 2;
-			this.dcMain.Location = new System.Drawing.Point(30, 28);
-			this.dcMain.Name = "dcMain";
-			this.dcMain.Size = new System.Drawing.Size(192, 386);
-			this.dcMain.TabIndex = 3;
-			this.dcMain.DockItemClosing += new FloatControlLib.DockItemClosingEvent(this.dcMain_DockItemClosing);
-			this.dcMain.DockItemFloating += new FloatControlLib.DockItemFloatingEvent(this.dcMain_DockItemFloating);
-			// 
-			// spMain
-			// 
-			this.spMain.BackColor = System.Drawing.Color.FromArgb(((System.Byte)(192)), ((System.Byte)(192)), ((System.Byte)(255)));
-			this.spMain.Location = new System.Drawing.Point(222, 28);
-			this.spMain.Name = "spMain";
-			this.spMain.Size = new System.Drawing.Size(4, 386);
-			this.spMain.TabIndex = 4;
-			this.spMain.TabStop = false;
-			// 
-			// imgsToolbox
-			// 
-			this.imgsToolbox.ImageSize = new System.Drawing.Size(16, 16);
-			this.imgsToolbox.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgsToolbox.ImageStream")));
-			this.imgsToolbox.TransparentColor = System.Drawing.Color.Transparent;
-			// 
-			// saveFileDlg
-			// 
-			this.saveFileDlg.DefaultExt = "xml";
-			this.saveFileDlg.Filter = "Diagram(*.xml)|*.xml|All Files(*.*)|*.*";
-			// 
-			// openFileDlg
-			// 
-			this.openFileDlg.DefaultExt = "xml";
-			this.openFileDlg.Filter = "Diagram(*.xml)|*.xml|All Files(*.*)|*.*";
-			// 
-			// MainForm
-			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(6, 15);
-			this.BackColor = System.Drawing.SystemColors.Control;
-			this.ClientSize = new System.Drawing.Size(806, 437);
-			this.Controls.Add(this.spMain);
-			this.Controls.Add(this.dcMain);
-			this.Controls.Add(this.fbMain);
-			this.Controls.Add(this.sbMain);
-			this.Controls.Add(this.tbMain);
-			this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((System.Byte)(0)));
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-			this.IsMdiContainer = true;
-			this.Menu = this.muMain;
-			this.Name = "MainForm";
-			this.Text = "QuickDiagram";
-			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-			this.Load += new System.EventHandler(this.MainForm_Load);
-			((System.ComponentModel.ISupportInitialize)(this.sbpStatus)).EndInit();
-			((System.ComponentModel.ISupportInitialize)(this.sbpPosition)).EndInit();
-			this.ResumeLayout(false);
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.muMain = new System.Windows.Forms.MainMenu(this.components);
+            this.menuItem1 = new System.Windows.Forms.MenuItem();
+            this.menuItem2 = new System.Windows.Forms.MenuItem();
+            this.menuItem3 = new System.Windows.Forms.MenuItem();
+            this.menuItem4 = new System.Windows.Forms.MenuItem();
+            this.menuItem5 = new System.Windows.Forms.MenuItem();
+            this.menuItem6 = new System.Windows.Forms.MenuItem();
+            this.menuItem7 = new System.Windows.Forms.MenuItem();
+            this.menuItem8 = new System.Windows.Forms.MenuItem();
+            this.menuItem9 = new System.Windows.Forms.MenuItem();
+            this.menuItem10 = new System.Windows.Forms.MenuItem();
+            this.menuItem12 = new System.Windows.Forms.MenuItem();
+            this.menuItem13 = new System.Windows.Forms.MenuItem();
+            this.menuItem11 = new System.Windows.Forms.MenuItem();
+            this.menuItem14 = new System.Windows.Forms.MenuItem();
+            this.menuItem15 = new System.Windows.Forms.MenuItem();
+            this.menuItem16 = new System.Windows.Forms.MenuItem();
+            this.menuItem17 = new System.Windows.Forms.MenuItem();
+            this.menuItem18 = new System.Windows.Forms.MenuItem();
+            this.tbMain = new System.Windows.Forms.ToolBar();
+            this.tbbNew = new System.Windows.Forms.ToolBarButton();
+            this.tbbOpen = new System.Windows.Forms.ToolBarButton();
+            this.tbbSave = new System.Windows.Forms.ToolBarButton();
+            this.tbSep1 = new System.Windows.Forms.ToolBarButton();
+            this.tbbCut = new System.Windows.Forms.ToolBarButton();
+            this.tbbCopy = new System.Windows.Forms.ToolBarButton();
+            this.tbbPaste = new System.Windows.Forms.ToolBarButton();
+            this.tbbDelete = new System.Windows.Forms.ToolBarButton();
+            this.tbSep2 = new System.Windows.Forms.ToolBarButton();
+            this.tbbRedo = new System.Windows.Forms.ToolBarButton();
+            this.tbbUndo = new System.Windows.Forms.ToolBarButton();
+            this.tbSep3 = new System.Windows.Forms.ToolBarButton();
+            this.imgsToolbar = new System.Windows.Forms.ImageList(this.components);
+            this.sbMain = new System.Windows.Forms.StatusBar();
+            this.sbpStatus = new System.Windows.Forms.StatusBarPanel();
+            this.sbpPosition = new System.Windows.Forms.StatusBarPanel();
+            this.spMain = new System.Windows.Forms.Splitter();
+            this.imgsToolbox = new System.Windows.Forms.ImageList(this.components);
+            this.saveFileDlg = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDlg = new System.Windows.Forms.OpenFileDialog();
+            this.dcMain = new FloatControlLib.DockControl();
+            this.fbMain = new FloatControlLib.FloatBar();
+            ((System.ComponentModel.ISupportInitialize)(this.sbpStatus)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sbpPosition)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // muMain
+            // 
+            this.muMain.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem1,
+            this.menuItem10,
+            this.menuItem11,
+            this.menuItem16});
+            // 
+            // menuItem1
+            // 
+            this.menuItem1.Index = 0;
+            this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem2,
+            this.menuItem3,
+            this.menuItem4,
+            this.menuItem5,
+            this.menuItem6,
+            this.menuItem7,
+            this.menuItem8,
+            this.menuItem9});
+            this.menuItem1.Text = "&File";
+            // 
+            // menuItem2
+            // 
+            this.menuItem2.Index = 0;
+            this.menuItem2.Text = "&New Diagram";
+            this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
+            // 
+            // menuItem3
+            // 
+            this.menuItem3.Index = 1;
+            this.menuItem3.Text = "&Open Diagram";
+            this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
+            // 
+            // menuItem4
+            // 
+            this.menuItem4.Index = 2;
+            this.menuItem4.Text = "&Close Diagram";
+            // 
+            // menuItem5
+            // 
+            this.menuItem5.Index = 3;
+            this.menuItem5.Text = "-";
+            // 
+            // menuItem6
+            // 
+            this.menuItem6.Index = 4;
+            this.menuItem6.Text = "&Save Diagram";
+            this.menuItem6.Click += new System.EventHandler(this.menuItem6_Click);
+            // 
+            // menuItem7
+            // 
+            this.menuItem7.Index = 5;
+            this.menuItem7.Text = "Save Diagram &as";
+            this.menuItem7.Click += new System.EventHandler(this.menuItem7_Click);
+            // 
+            // menuItem8
+            // 
+            this.menuItem8.Index = 6;
+            this.menuItem8.Text = "-";
+            // 
+            // menuItem9
+            // 
+            this.menuItem9.Index = 7;
+            this.menuItem9.Text = "E&xit";
+            this.menuItem9.Click += new System.EventHandler(this.menuItem9_Click);
+            // 
+            // menuItem10
+            // 
+            this.menuItem10.Index = 1;
+            this.menuItem10.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem12,
+            this.menuItem13});
+            this.menuItem10.Text = "Input";
+            // 
+            // menuItem12
+            // 
+            this.menuItem12.Index = 0;
+            this.menuItem12.Text = "Diagram";
+            this.menuItem12.Click += new System.EventHandler(this.menuItem12_Click);
+            // 
+            // menuItem13
+            // 
+            this.menuItem13.Index = 1;
+            this.menuItem13.Text = "Value";
+            this.menuItem13.Click += new System.EventHandler(this.menuItem13_Click);
+            // 
+            // menuItem11
+            // 
+            this.menuItem11.Index = 2;
+            this.menuItem11.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem14,
+            this.menuItem15});
+            this.menuItem11.Text = "Simulation";
+            // 
+            // menuItem14
+            // 
+            this.menuItem14.Index = 0;
+            this.menuItem14.Text = "List Equation";
+            this.menuItem14.Click += new System.EventHandler(this.menuItem14_Click);
+            // 
+            // menuItem15
+            // 
+            this.menuItem15.Index = 1;
+            this.menuItem15.Text = "Solve Unknown";
+            this.menuItem15.Click += new System.EventHandler(this.menuItem15_Click);
+            // 
+            // menuItem16
+            // 
+            this.menuItem16.Index = 3;
+            this.menuItem16.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem17,
+            this.menuItem18});
+            this.menuItem16.Text = "Generation";
+            // 
+            // menuItem17
+            // 
+            this.menuItem17.Index = 0;
+            this.menuItem17.Text = "Display Pspice Code";
+            this.menuItem17.Click += new System.EventHandler(this.menuItem17_Click);
+            // 
+            // menuItem18
+            // 
+            this.menuItem18.Index = 1;
+            this.menuItem18.Text = "Save Pspice Code";
+            // 
+            // tbMain
+            // 
+            this.tbMain.Appearance = System.Windows.Forms.ToolBarAppearance.Flat;
+            this.tbMain.Buttons.AddRange(new System.Windows.Forms.ToolBarButton[] {
+            this.tbbNew,
+            this.tbbOpen,
+            this.tbbSave,
+            this.tbSep1,
+            this.tbbCut,
+            this.tbbCopy,
+            this.tbbPaste,
+            this.tbbDelete,
+            this.tbSep2,
+            this.tbbRedo,
+            this.tbbUndo,
+            this.tbSep3});
+            this.tbMain.ButtonSize = new System.Drawing.Size(16, 16);
+            this.tbMain.DropDownArrows = true;
+            this.tbMain.ImageList = this.imgsToolbar;
+            this.tbMain.Location = new System.Drawing.Point(0, 0);
+            this.tbMain.Name = "tbMain";
+            this.tbMain.ShowToolTips = true;
+            this.tbMain.Size = new System.Drawing.Size(806, 28);
+            this.tbMain.TabIndex = 0;
+            this.tbMain.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.tbMain_ButtonClick);
+            // 
+            // tbbNew
+            // 
+            this.tbbNew.ImageIndex = 0;
+            this.tbbNew.Name = "tbbNew";
+            // 
+            // tbbOpen
+            // 
+            this.tbbOpen.ImageIndex = 1;
+            this.tbbOpen.Name = "tbbOpen";
+            // 
+            // tbbSave
+            // 
+            this.tbbSave.ImageIndex = 2;
+            this.tbbSave.Name = "tbbSave";
+            // 
+            // tbSep1
+            // 
+            this.tbSep1.Name = "tbSep1";
+            this.tbSep1.Style = System.Windows.Forms.ToolBarButtonStyle.Separator;
+            // 
+            // tbbCut
+            // 
+            this.tbbCut.ImageIndex = 5;
+            this.tbbCut.Name = "tbbCut";
+            // 
+            // tbbCopy
+            // 
+            this.tbbCopy.ImageIndex = 6;
+            this.tbbCopy.Name = "tbbCopy";
+            // 
+            // tbbPaste
+            // 
+            this.tbbPaste.ImageIndex = 7;
+            this.tbbPaste.Name = "tbbPaste";
+            // 
+            // tbbDelete
+            // 
+            this.tbbDelete.ImageIndex = 8;
+            this.tbbDelete.Name = "tbbDelete";
+            // 
+            // tbSep2
+            // 
+            this.tbSep2.Name = "tbSep2";
+            this.tbSep2.Style = System.Windows.Forms.ToolBarButtonStyle.Separator;
+            // 
+            // tbbRedo
+            // 
+            this.tbbRedo.ImageIndex = 4;
+            this.tbbRedo.Name = "tbbRedo";
+            // 
+            // tbbUndo
+            // 
+            this.tbbUndo.ImageIndex = 3;
+            this.tbbUndo.Name = "tbbUndo";
+            // 
+            // tbSep3
+            // 
+            this.tbSep3.Name = "tbSep3";
+            this.tbSep3.Style = System.Windows.Forms.ToolBarButtonStyle.Separator;
+            // 
+            // imgsToolbar
+            // 
+            this.imgsToolbar.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgsToolbar.ImageStream")));
+            this.imgsToolbar.TransparentColor = System.Drawing.Color.Transparent;
+            this.imgsToolbar.Images.SetKeyName(0, "");
+            this.imgsToolbar.Images.SetKeyName(1, "");
+            this.imgsToolbar.Images.SetKeyName(2, "");
+            this.imgsToolbar.Images.SetKeyName(3, "");
+            this.imgsToolbar.Images.SetKeyName(4, "");
+            this.imgsToolbar.Images.SetKeyName(5, "");
+            this.imgsToolbar.Images.SetKeyName(6, "");
+            this.imgsToolbar.Images.SetKeyName(7, "");
+            this.imgsToolbar.Images.SetKeyName(8, "");
+            // 
+            // sbMain
+            // 
+            this.sbMain.Location = new System.Drawing.Point(0, 393);
+            this.sbMain.Name = "sbMain";
+            this.sbMain.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
+            this.sbpStatus,
+            this.sbpPosition});
+            this.sbMain.ShowPanels = true;
+            this.sbMain.Size = new System.Drawing.Size(806, 23);
+            this.sbMain.TabIndex = 1;
+            this.sbMain.SizeChanged += new System.EventHandler(this.sbMain_SizeChanged);
+            // 
+            // sbpStatus
+            // 
+            this.sbpStatus.Name = "sbpStatus";
+            // 
+            // sbpPosition
+            // 
+            this.sbpPosition.Alignment = System.Windows.Forms.HorizontalAlignment.Center;
+            this.sbpPosition.Name = "sbpPosition";
+            // 
+            // spMain
+            // 
+            this.spMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.spMain.Location = new System.Drawing.Point(222, 28);
+            this.spMain.Name = "spMain";
+            this.spMain.Size = new System.Drawing.Size(4, 365);
+            this.spMain.TabIndex = 4;
+            this.spMain.TabStop = false;
+            // 
+            // imgsToolbox
+            // 
+            this.imgsToolbox.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgsToolbox.ImageStream")));
+            this.imgsToolbox.TransparentColor = System.Drawing.Color.Transparent;
+            this.imgsToolbox.Images.SetKeyName(0, "");
+            this.imgsToolbox.Images.SetKeyName(1, "");
+            this.imgsToolbox.Images.SetKeyName(2, "");
+            // 
+            // saveFileDlg
+            // 
+            this.saveFileDlg.DefaultExt = "xml";
+            this.saveFileDlg.Filter = "Diagram(*.xml)|*.xml|All Files(*.*)|*.*";
+            // 
+            // openFileDlg
+            // 
+            this.openFileDlg.DefaultExt = "xml";
+            this.openFileDlg.Filter = "Diagram(*.xml)|*.xml|All Files(*.*)|*.*";
+            // 
+            // dcMain
+            // 
+            this.dcMain.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dcMain.Location = new System.Drawing.Point(30, 28);
+            this.dcMain.Name = "dcMain";
+            this.dcMain.Padding = new System.Windows.Forms.Padding(2);
+            this.dcMain.Size = new System.Drawing.Size(192, 365);
+            this.dcMain.TabIndex = 3;
+            this.dcMain.DockItemFloating += new FloatControlLib.DockItemFloatingEvent(this.dcMain_DockItemFloating);
+            this.dcMain.DockItemClosing += new FloatControlLib.DockItemClosingEvent(this.dcMain_DockItemClosing);
+            // 
+            // fbMain
+            // 
+            this.fbMain.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.fbMain.Dock = System.Windows.Forms.DockStyle.Left;
+            this.fbMain.Location = new System.Drawing.Point(0, 28);
+            this.fbMain.Name = "fbMain";
+            this.fbMain.Padding = new System.Windows.Forms.Padding(2, 2, 3, 2);
+            this.fbMain.Size = new System.Drawing.Size(30, 365);
+            this.fbMain.TabIndex = 2;
+            this.fbMain.FloatItemClosing += new FloatControlLib.FloatItemClosingEvent(this.fbMain_FloatItemClosing);
+            this.fbMain.FloatWindowHiding += new FloatControlLib.FloatWindowHidingEvent(this.fbMain_FloatWindowHiding);
+            this.fbMain.FloatItemDocking += new FloatControlLib.FloatItemDockingEvent(this.fbMain_FloatItemDocking);
+            // 
+            // MainForm
+            // 
+            this.AutoScaleBaseSize = new System.Drawing.Size(6, 15);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(806, 416);
+            this.Controls.Add(this.spMain);
+            this.Controls.Add(this.dcMain);
+            this.Controls.Add(this.fbMain);
+            this.Controls.Add(this.sbMain);
+            this.Controls.Add(this.tbMain);
+            this.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.IsMdiContainer = true;
+            this.Menu = this.muMain;
+            this.Name = "MainForm";
+            this.Text = "QuickDiagram";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.sbpStatus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sbpPosition)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
 
 		}
 		#endregion
@@ -949,7 +973,7 @@ namespace QuickDiagramUI
 			{
 				try
 				{
-					readXml = new EEDomain.ReadFromXml(openFileDlg.FileName);
+					readXml = new EEDomain.ReadFromXml(openFileDlg.FileName,false);
 				}
 				catch( Exception ex )
 				{
@@ -967,35 +991,50 @@ namespace QuickDiagramUI
 			form.Show();
 		}
 
+        //ADD 10/10/2009
 		private void menuItem14_Click(object sender, System.EventArgs e)
 		{
+            DrawingForm frmDrawing = (DrawingForm)this.ActiveMdiChild;
 			OutputForm form = new OutputForm();
+            frmDrawing.DiagramConvertXml();
 			form.Text = "Equation";
-			form.B1Action(readXml);
+            if (readXml != null)
+            {
+                form.B1Action(readXml);
+            }
+            else 
+            { 
+                form.B1Action(frmDrawing.readXmls);
+            }
 			form.Show();
 		}
 
 		private void menuItem15_Click(object sender, System.EventArgs e)
 		{
+            DrawingForm frmDrawing = (DrawingForm)this.ActiveMdiChild;
+            frmDrawing.DiagramConvertXml();
 			OutputForm form = new OutputForm();
 			form.Text = "Calculate";
-			form.B2Action(readXml);
+            if (readXml != null)
+            {
+                form.B2Action(readXml);
+            }
+            else 
+            { 
+                form.B2Action(frmDrawing.readXmls);
+            }
 			form.Show();
 		}
 
 		public void menuItem13_Click(object sender, System.EventArgs e)
 		{
-			InputForm inputForm = new InputForm(readXml);
+			//InputForm inputForm = new InputForm(readXml);
+            DrawingForm frmDrawing = (DrawingForm)this.ActiveMdiChild;
+            InputForm inputForm = new InputForm(frmDrawing.readXmls);
 			inputForm.Show();
-			//readXml = inputForm.ReturnReadXml();
 		
 		}
-
-		private void menuItem10_Click(object sender, System.EventArgs e)
-		{
-		
-		}
-
+        //end
 	}
 
 	public enum UserActions {Editing, Moving, Controlling, InsertObject, Selecting, Sketching, Linking, MovingKeyPoint}

@@ -13,9 +13,9 @@ import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\objsafe.idl";
 	helpstring("ITracker Interface"),
 	pointer_default(unique)
 ] 
-#line 15 "e:\\test\\quickdiagram\\mousetrackerlib\\tracker.h"
+#line 15 "d:\\new folder\\qd_new\\mousetrackerlib\\tracker.h"
 interface ITracker : IDispatch {
-#line 17 "e:\\test\\quickdiagram\\mousetrackerlib\\tracker.h"
+#line 17 "d:\\new folder\\qd_new\\mousetrackerlib\\tracker.h"
 	[id(1),helpstring("method StartTracker")] HRESULT  StartTracker([in] VARIANT_BOOL ClearPreviousTrack);
 	[id(2),helpstring("method StopTracker")] HRESULT  StopTracker();
 	[propget,id(3),helpstring("property IsTracking")] HRESULT  IsTracking([out,retval] VARIANT_BOOL *pVal);
@@ -36,7 +36,7 @@ library MouseTrackerLib
 		uuid(098069F8-F34C-44D6-93DA-7D64BD744381),
 		helpstring("Tracker Class")
 	] 
-#line 38 "e:\\test\\quickdiagram\\mousetrackerlib\\tracker.h"
+#line 38 "d:\\new folder\\qd_new\\mousetrackerlib\\tracker.h"
 	coclass CTracker {
 		interface ITracker;
 	};
