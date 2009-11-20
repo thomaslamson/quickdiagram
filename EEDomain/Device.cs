@@ -177,6 +177,44 @@ namespace EEDomain
             return "x";
         }
 
+        public void SettMainValue(string tempValue)
+        {
+            switch (this.GetType().ToString()) 
+            { 
+                case "EEDomain.JFET":
+                    ((EEDomain.JFET)this).SetModalName(tempValue);
+                    break;
+                case "EEDomain.Diode":
+                    ((EEDomain.Diode)this).SetModalName(tempValue);
+                    break;
+                case "EEDomain.Opamp":
+                    ((EEDomain.Opamp)this).SetModalName(tempValue);
+                    break;
+                case "EEDomain.VsourceDC":
+                    ((EEDomain.VsourceDC)this).SetVoltage(int.Parse(tempValue));
+                    break;
+                case "EEDomain.Csource":
+                    ((EEDomain.Csource)this).SetCurrent(int.Parse(tempValue));
+                    break;
+                case "EEDomain.VsourceAC":
+                    ((EEDomain.VsourceAC)this).SetVoltage((int.Parse(tempValue)));
+                    break;
+                case "EEDomain.Resistor":
+                    ((EEDomain.Resistor)this).SetResistance((int.Parse(tempValue)));
+                    break;
+                case "EEDomain.Capacitor":
+                    ((EEDomain.Capacitor)this).SetCapacitance(tempValue);
+                    break;
+                case "EEDomain.Inductor":
+                    ((EEDomain.Inductor)this).SetInductance(tempValue);
+                    break;
+                case "EEDomain.Transitor":
+                    ((EEDomain.Transitor)this).SetModalName(tempValue);
+                    break;
+            }
+
+        }
+
         public string GetQName()
         {
             return Qname;

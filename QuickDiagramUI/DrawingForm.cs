@@ -2235,24 +2235,35 @@ namespace QuickDiagramUI
 		/// </summary>
 		public void SaveDiagramToFile()
 		{
-			SaveDiagramToFile( m_currentFileName );
+			SaveDiagramToFile(m_currentFileName, "others");
 		}
 
 		/// <summary>
 		/// Save the whole diagram to a xml file.
 		/// </summary>
 		/// <param name="fileName">File name into which the whole diagram is saved.</param>
-		public void SaveDiagramToFile( string fileName )
+		public void SaveDiagramToFile( string fileName, string type)
 		{
-			System.Xml.XmlTextWriter	writer;
-
+			System.Xml.XmlTextWriter writer;
 			writer = new System.Xml.XmlTextWriter(fileName, System.Text.Encoding.UTF8);
+            switch (type)
+            { 
+                case "ee":
+                    readXmls.SaveVar(fileName);
+                    break;
+                case "others":
+                    break;
+                default: 
+                    break;
+            }
 			SaveDiagramToXml(writer);
 			writer.Close();
-
 			m_currentFileName = fileName;
 		}
 
+        /// <summary>
+        /// Save the GOM_Diagram type to a xml file
+        /// </summary>
 		public void SaveDiagramToXml( System.Xml.XmlTextWriter writer )
 		{
 			GOMLib.GOM_Diagram diagram = new GOMLib.GOM_Diagram(m_rgObjects,m_rgLinks);
@@ -2263,17 +2274,24 @@ namespace QuickDiagramUI
 		{
 			System.Xml.XmlDocument	doc = new System.Xml.XmlDocument();
 			doc.Load( fileName );
-			LoadDiagramFromXml( doc.DocumentElement );
+            LoadDiagramFromXml(doc.DocumentElement);
+
+            //Syn EEDomain file - new add week11
+            try 
+            {
+                readXmls.LoadVar(fileName);
+                DrawObjectsOnCanvas();
+            }
+            catch { }
 		}
 
-		public void LoadDiagramFromXml( System.Xml.XmlNode node )
+		public void LoadDiagramFromXml( System.Xml.XmlNode node)
 		{
 			GOMLib.GOM_Diagram diagram = new GOMLib.GOM_Diagram();
 			diagram.LoadFromXML(node, null);
 			this.m_rgObjects = diagram.Objects;
 			this.m_rgLinks = diagram.Links;
-
-			DrawObjectsOnCanvas();
+            DrawObjectsOnCanvas();
 		}
 
 		private void plDraw_DoubleClick(object sender, System.EventArgs e)

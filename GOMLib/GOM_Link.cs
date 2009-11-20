@@ -444,7 +444,7 @@ namespace GOMLib
 			this.m_drawingStyle.SaveToXML(writer);
 
 			// Key points
-			writer.WriteStartElement(GOM_TAGS.POINTS);
+			writer.WriteStartElement(GOM_TAGS.KEYPOINTS);
 			for( int i=0; i<m_keyPts.Count; i++ )
 			{
 				writer.WriteStartElement(GOM_TAGS.POINT);

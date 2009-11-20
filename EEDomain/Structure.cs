@@ -203,75 +203,74 @@ namespace EEDomain
 		{
 			kclNodes = kcl;
 		}
-		
-		public string OutObjEquation()
-		{	
-			if((device.GetType().ToString()).Equals("EEDomain.Resistor"))
-			{
-				if(startNode.GetName()!=null && endNode.GetName()!=null)
-				{	//Console.WriteLine("this is Resistor's equation");
-					//string equation = "V" + startNode.GetName() + " - " + "V" + endNode.GetName() + " = " + "I" +  device.GetQName() +"*"+ ((Resistor)device).GetResistance();
-					string equation = "V" + startNode.GetName() + " - " + "V" + endNode.GetName() + " = " + "-" + device.GetQName() +"*"+ ((Resistor)device).GetResistance();
-					
-					return(equation);
-				}
-				else
-					return null;
-			}
-			else if((device.GetType().ToString()).Equals("EEDomain.VsourceDC"))
-			{
-				if(startNode.GetName()!=null && endNode.GetName()!=null)
-				{	//Console.WriteLine("this is VsourceDC's equation");
-					string equation = "V" + startNode.GetName() + " - " + "V" + endNode.GetName() + " = " +((VsourceDC)device).GetVoltage();
-					return(equation);
-				}
-				else
-					return null;
-			}
-			else 
-				return null;
-		}
 
-		public string OutConnEquation()
-		{
-			startNode = conn.GetStart();
-			endNode = conn.GetEnd();
+        public string OutObjEquation()
+        {
+            if ((device.GetType().ToString()).Equals("EEDomain.Resistor"))
+            {
+                if (startNode.GetName() != null && endNode.GetName() != null)
+                {	//Console.WriteLine("this is Resistor's equation");
+                    //string equation = "V" + startNode.GetName() + " - " + "V" + endNode.GetName() + " = " + "I" + device.GetName() +"*"+ ((Resistor)device).GetResistance();
+                    string equation = "V" + startNode.GetName() + " - " + "V" + endNode.GetName() + " = " + "-I" + device.GetName() + "*" + ((Resistor)device).GetResistance();
 
-			string equation = "V" + startNode.GetName() + " = " + "V" +endNode.GetName(); 
-			return(equation);
-		}
-		
-		public string OutPtEquation()
-		{
-			IEnumerator kclEnum = kclNodes.GetEnumerator();
-			string equation = "";
-			int count=0;
-			while(kclEnum.MoveNext())
-			{
-				count++;
-				device = (Device)kclEnum.Current;
-				if(device.GetType().ToString().Equals("EEDomain.VsourceDC"))
-					return null;
-				else if(equation.Equals(""))
-				{
-					equation = ""+ device.GetQName();
-				}
-				else
-				{
-					if(device.GetMinus()==true)
-					{	
-						equation = equation + " - " +""+ device.GetQName();
-					}
-					else
-					{
-						equation = equation + " + " +""+ device.GetQName();
-					}
-				}
-				
-			}
-			return(equation+" = 0 ");
-		}
-	
+                    return (equation);
+                }
+                else
+                    return null;
+            }
+            else if ((device.GetType().ToString()).Equals("EEDomain.VsourceDC"))
+            {
+                if (startNode.GetName() != null && endNode.GetName() != null)
+                {	//Console.WriteLine("this is VsourceDC's equation");
+                    string equation = "V" + startNode.GetName() + " - " + "V" + endNode.GetName() + " = " + ((VsourceDC)device).GetVoltage();
+                    return (equation);
+                }
+                else
+                    return null;
+            }
+            else
+                return null;
+        }
+
+        public string OutConnEquation()
+        {
+            startNode = conn.GetStart();
+            endNode = conn.GetEnd();
+
+            string equation = "V" + startNode.GetName() + " = " + "V" + endNode.GetName();
+            return (equation);
+        }
+
+        public string OutPtEquation()
+        {
+            IEnumerator kclEnum = kclNodes.GetEnumerator();
+            string equation = "";
+            int count = 0;
+            while (kclEnum.MoveNext())
+            {
+                count++;
+                device = (Device)kclEnum.Current;
+                if (device.GetType().ToString().Equals("EEDomain.VsourceDC"))
+                    return null;
+                else if (equation.Equals(""))
+                {
+                    equation = "I" + device.GetName();
+                }
+                else
+                {
+                    if (device.GetMinus() == true)
+                    {
+                        equation = equation + " - " + "I" + device.GetName();
+                    }
+                    else
+                    {
+                        equation = equation + " + " + "I" + device.GetName();
+                    }
+                }
+
+            }
+            return (equation + " = 0 ");
+        }
 		
 	
 	}
@@ -740,6 +739,36 @@ namespace EEDomain
                         break;
                     }
                 }
+            }
+        }
+
+        public void SaveVar(String fileName)
+        {
+            System.IO.StreamWriter writer = new System.IO.StreamWriter(fileName + "ee");
+            for (int i = 0; i < cdList.Count; i++)
+            {
+                writer.WriteLine(((Device)cdList[i]).GetID() + ";" + ((Device)cdList[i]).GetQName() + ";" + ((Device)cdList[i]).GetMainValue());
+            }
+
+            writer.Close();
+        }
+
+        public void LoadVar(String fileName) 
+        {
+            System.IO.StreamReader reader = new System.IO.StreamReader(fileName + "ee");
+            while (!reader.EndOfStream) 
+            {
+                string[] Tline = reader.ReadLine().Split(';');
+                for (int i = 0; i < cdList.Count; i++)
+                {
+                    if (((Device)cdList[i]).GetID() == Tline[0].ToString())
+                    {
+                        ((Device)cdList[i]).SetQName(Tline[1]);
+                        ((Device)cdList[i]).SettMainValue(Tline[2]);
+                        break;
+                    }
+                }
+            
             }
         }
         #endregion
