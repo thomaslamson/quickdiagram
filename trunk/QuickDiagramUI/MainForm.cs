@@ -55,6 +55,8 @@ namespace QuickDiagramUI
 		private System.Windows.Forms.MenuItem menuItem17;
 		private System.ComponentModel.IContainer components;
 		private System.Windows.Forms.MenuItem menuItem18;
+        private MenuItem menuItem19;
+        private MenuItem menuItem20;
 
 		private EEDomain.ReadFromXml readXml;
 
@@ -126,6 +128,8 @@ namespace QuickDiagramUI
             this.menuItem5 = new System.Windows.Forms.MenuItem();
             this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.menuItem7 = new System.Windows.Forms.MenuItem();
+            this.menuItem19 = new System.Windows.Forms.MenuItem();
+            this.menuItem20 = new System.Windows.Forms.MenuItem();
             this.menuItem8 = new System.Windows.Forms.MenuItem();
             this.menuItem9 = new System.Windows.Forms.MenuItem();
             this.menuItem10 = new System.Windows.Forms.MenuItem();
@@ -217,8 +221,22 @@ namespace QuickDiagramUI
             // menuItem7
             // 
             this.menuItem7.Index = 5;
+            this.menuItem7.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem19,
+            this.menuItem20});
             this.menuItem7.Text = "Save Diagram &as";
-            this.menuItem7.Click += new System.EventHandler(this.menuItem7_Click);
+            // 
+            // menuItem19
+            // 
+            this.menuItem19.Index = 0;
+            this.menuItem19.Text = "EE Diagram";
+            this.menuItem19.Click += new System.EventHandler(this.menuItem19_Click);
+            // 
+            // menuItem20
+            // 
+            this.menuItem20.Index = 1;
+            this.menuItem20.Text = "Others ...";
+            this.menuItem20.Click += new System.EventHandler(this.menuItem20_Click);
             // 
             // menuItem8
             // 
@@ -392,7 +410,7 @@ namespace QuickDiagramUI
             // 
             // sbMain
             // 
-            this.sbMain.Location = new System.Drawing.Point(0, 393);
+            this.sbMain.Location = new System.Drawing.Point(0, 372);
             this.sbMain.Name = "sbMain";
             this.sbMain.Panels.AddRange(new System.Windows.Forms.StatusBarPanel[] {
             this.sbpStatus,
@@ -416,7 +434,7 @@ namespace QuickDiagramUI
             this.spMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.spMain.Location = new System.Drawing.Point(222, 28);
             this.spMain.Name = "spMain";
-            this.spMain.Size = new System.Drawing.Size(4, 365);
+            this.spMain.Size = new System.Drawing.Size(4, 344);
             this.spMain.TabIndex = 4;
             this.spMain.TabStop = false;
             // 
@@ -444,7 +462,7 @@ namespace QuickDiagramUI
             this.dcMain.Location = new System.Drawing.Point(30, 28);
             this.dcMain.Name = "dcMain";
             this.dcMain.Padding = new System.Windows.Forms.Padding(2);
-            this.dcMain.Size = new System.Drawing.Size(192, 365);
+            this.dcMain.Size = new System.Drawing.Size(192, 344);
             this.dcMain.TabIndex = 3;
             this.dcMain.DockItemFloating += new FloatControlLib.DockItemFloatingEvent(this.dcMain_DockItemFloating);
             this.dcMain.DockItemClosing += new FloatControlLib.DockItemClosingEvent(this.dcMain_DockItemClosing);
@@ -456,7 +474,7 @@ namespace QuickDiagramUI
             this.fbMain.Location = new System.Drawing.Point(0, 28);
             this.fbMain.Name = "fbMain";
             this.fbMain.Padding = new System.Windows.Forms.Padding(2, 2, 3, 2);
-            this.fbMain.Size = new System.Drawing.Size(30, 365);
+            this.fbMain.Size = new System.Drawing.Size(30, 344);
             this.fbMain.TabIndex = 2;
             this.fbMain.FloatItemClosing += new FloatControlLib.FloatItemClosingEvent(this.fbMain_FloatItemClosing);
             this.fbMain.FloatWindowHiding += new FloatControlLib.FloatWindowHidingEvent(this.fbMain_FloatWindowHiding);
@@ -466,7 +484,7 @@ namespace QuickDiagramUI
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(6, 15);
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(806, 416);
+            this.ClientSize = new System.Drawing.Size(806, 395);
             this.Controls.Add(this.spMain);
             this.Controls.Add(this.dcMain);
             this.Controls.Add(this.fbMain);
@@ -901,14 +919,14 @@ namespace QuickDiagramUI
 			}
 		}
 
-		private void OnSaveDiagramAs()
+		private void OnSaveDiagramAs(string type)
 		{
 			if ( saveFileDlg.ShowDialog(this) == DialogResult.OK )
 			{
 				DrawingForm	frmDrawing = (DrawingForm)this.ActiveMdiChild;
 				try
 				{
-					frmDrawing.SaveDiagramToFile(saveFileDlg.FileName);
+                    frmDrawing.SaveDiagramToFile(saveFileDlg.FileName, type);
 				}
 				catch( Exception ex )
 				{
@@ -939,10 +957,6 @@ namespace QuickDiagramUI
 			OnSaveDiagram();
 		}
 
-		private void menuItem7_Click(object sender, System.EventArgs e)
-		{
-			OnSaveDiagramAs();
-		}
 
 		private void menuItem3_Click(object sender, System.EventArgs e)
 		{
@@ -1034,6 +1048,16 @@ namespace QuickDiagramUI
 			inputForm.Show();
 		
 		}
+
+        private void menuItem19_Click(object sender, EventArgs e)
+        {
+            OnSaveDiagramAs("ee");
+        }
+
+        private void menuItem20_Click(object sender, EventArgs e)
+        {
+            OnSaveDiagramAs("others");
+        }
         //end
 	}
 
