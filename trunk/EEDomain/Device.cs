@@ -20,6 +20,8 @@ namespace EEDomain
 		public Device()
 		{
 			nodeCount = 0;
+            SetUnit("");
+            SettMainValue("0");
 		}
 
 		public void SetID(string i)
@@ -122,6 +124,7 @@ namespace EEDomain
 
         #region chester
         private string Qname;
+        private string unit;
 
         public string GetMainValue()
         {
@@ -224,6 +227,16 @@ namespace EEDomain
         {
             Qname = n;
         }
+
+        public string GetUnit()
+        {
+            return unit;
+        }
+
+        public void SetUnit(string n)
+        {
+            unit = n;
+        }
         #endregion
 
     }
@@ -236,6 +249,7 @@ namespace EEDomain
             SetName(name);
             SetQName(qn);
 			SetID(id);
+            SetUnit("ohm");
 			SetResistance(5);
 		}
 
@@ -267,6 +281,7 @@ namespace EEDomain
 			SetName(name);
             SetQName(qn);
 			SetID(id);
+            SetUnit("v");
 			SetVoltage(10);			
 		}
 
@@ -339,12 +354,13 @@ namespace EEDomain
 	{	
 		private string capacitance;
 			
-		public Capacitor(string id,string name)
+		public Capacitor(string id,string name, string qn)
 		{
 			SetName(name);
 			SetID(id);
 			SetCapacitance("8");
-			
+            SetUnit("F");
+            SetQName(qn);
 		}
 
 		public void SetCapacitance(string c)
@@ -380,6 +396,7 @@ namespace EEDomain
 			SetID(id);
 			SetVoltage(0.0);	
 			SetPhase(0.0);
+            SetUnit("v");
 		}
 
 		public void SetVoltage(double v)
@@ -462,11 +479,12 @@ namespace EEDomain
 		private string NB;
 		private string NE;
 		private string modalName;
-		public Transitor(string id,string name)
+		public Transitor(string id,string name, string qn)
 		{
 			SetName(name);
 			SetID(id);
-			SetModalName("");
+			SetModalName("npn");
+            SetQName(qn);
 			
 		}
 		public void SetModalName(string n)
