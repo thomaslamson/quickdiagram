@@ -370,7 +370,7 @@ namespace EEDomain
 									break;
 								case "Capacitor" :
 									//device = (Capacitor) new Capacitor(objID,""+countDevice);
-									device = (Capacitor) new Capacitor(objID,""+countCapacitor);
+                                    device = (Capacitor)new Capacitor(objID, "" + countCapacitor, "Capacitor" + countCapacitor);
 									countCapacitor++;
 									//countDevice++;
 									break;
@@ -391,7 +391,7 @@ namespace EEDomain
 									break;
 								case "Transitor" :
 									//device = (Transitor) new Transitor(objID,""+countDevice);
-									device = (Transitor) new Transitor(objID,""+countTransitor);
+                                    device = (Transitor)new Transitor(objID, "" + countTransitor, "Transitor" + countTransitor);
 									countTransitor++;
 									//countDevice++;
 									break;
@@ -710,12 +710,13 @@ namespace EEDomain
             {
                 for (int i = 0; i < m_rgObjects.Count; i++)
                 {
-                    string tname, tvalue;
+                    string tname, tvalue, tunit;
                     if (m_rgObjects[i].id.ToString() == ((EEDomain.Device)enumtmp.Current).GetID().ToString())
                     {
                         try
                         {
                             tname = ((EEDomain.Device)enumtmp.Current).GetQName();
+                            
                             if (tname == null)
                             {
                                 tname = "D" + ((EEDomain.Device)enumtmp.Current).GetName();
@@ -726,16 +727,10 @@ namespace EEDomain
                             tname = "D" + ((EEDomain.Device)enumtmp.Current).GetName();
                         }
 
-                        try
-                        {
-                            tvalue = ((EEDomain.Device)enumtmp.Current).GetMainValue();
-                        }
-                        catch(Exception)
-                        {
-                            tvalue = "x";
-                        }
+                        tvalue = ((EEDomain.Device)enumtmp.Current).GetMainValue();
+                        tunit = ((EEDomain.Device)enumtmp.Current).GetUnit();
 
-                        canvas.DrawString(tname + " = " + tvalue, myFont, myBrush, m_rgObjects[i].xOffset - 5, m_rgObjects[i].yOffset -20);
+                        canvas.DrawString(tname + " = " + tvalue + tunit, myFont, myBrush, m_rgObjects[i].xOffset - 5, m_rgObjects[i].yOffset - 20);
                         break;
                     }
                 }
