@@ -1,7 +1,9 @@
 using System;
 using System.Xml;
 using System.Collections;
-using Bluebit.MatrixLibrary;
+//using Bluebit.MatrixLibrary;
+using EEDomain.MatrixCalculation;
+
 namespace EEDomain
 {
 
@@ -346,17 +348,25 @@ namespace EEDomain
 					I[nList.Count+dList.Count-countDevice-1,0] = ((VsourceDC)dEnum.Current).GetVoltage();
 					break;
 				}
-			}
+            }
+            //new add at 2009/12
 
-			Bluebit.MatrixLibrary.Matrix a = new Bluebit.MatrixLibrary.Matrix(Y);
-			Bluebit.MatrixLibrary.Matrix b = new Bluebit.MatrixLibrary.Matrix(I);
-			Bluebit.MatrixLibrary.Matrix c = new Bluebit.MatrixLibrary.Matrix();
-			
-			c = a.Solve(b);
-	
+            //Bluebit.MatrixLibrary.Matrix a = new Bluebit.MatrixLibrary.Matrix(Y);
+			//Bluebit.MatrixLibrary.Matrix b = new Bluebit.MatrixLibrary.Matrix(I);
+			//Bluebit.MatrixLibrary.Matrix c = new Bluebit.MatrixLibrary.Matrix();
+			//c = a.Solve(b);
 			//Console.WriteLine(c.ToString("F2"));
 
-			double[,] output = c.ToArray();
+            Matrix a = new Matrix(Y.GetLength(0), Y.GetLength(1));
+            a.Detail = Y;
+            Matrix b = new Matrix(I.GetLength(0), I.GetLength(1));
+            b.Detail = I;
+            Matrix c = MatrixOperator.MatrixMulti(MatrixOperator.MatrixInv(a), b);
+            double[,] output = c.Detail;
+
+            // end new add
+
+
 			double tempValue;
 			int nodeCount = 0;	
 			string tempCurrName = "" ;
