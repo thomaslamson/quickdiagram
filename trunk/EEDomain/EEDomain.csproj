@@ -110,6 +110,7 @@
     <Compile Include="Main.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MatrixCalculator.cs" />
     <Compile Include="Structure.cs">
       <SubType>Code</SubType>
     </Compile>
