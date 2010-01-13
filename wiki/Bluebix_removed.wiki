@@ -1,0 +1,9 @@
+#summary One-sentence summary of this page.
+
+Bluebix removed
+
+
+
+= Details =
+
+"Bluebix.dll" has been removed in r12 since we have found a substitutional open scource file "MatrixCalculator.cs".
