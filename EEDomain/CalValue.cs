@@ -414,7 +414,7 @@ namespace EEDomain
 				nodeCount++;
 			}
 			*/
-			
+			/*
 			while(dEnum.MoveNext())
 			{
 				if(((Device)dEnum.Current).GetType().ToString().Equals("EEDomain.Resistor"))
@@ -428,6 +428,21 @@ namespace EEDomain
 					nodeCount++;
 				}
 			}
+            */
+            while (dEnum.MoveNext())
+            {
+                if (((Device)dEnum.Current).GetType().ToString().Equals("EEDomain.Resistor"))
+                {
+                    string temp1 = ((Device)dEnum.Current).GetQName();
+                    //outputResult +="VR"+((Device)dEnum.Current).GetName()+" ";
+                    outputResult += "VR(" + temp1 + ") ";
+                    outputResult += (((Device)dEnum.Current).GetNode1().GetVoltage() - ((Device)dEnum.Current).GetNode2().GetVoltage()).ToString("0.00") + "V \n";
+                    //outputCurrentResult +="ID"+((Device)dEnum.Current).GetName()+" ";
+                    outputCurrentResult += "(" + temp1 + ")";
+                    outputCurrentResult += ((Device)dEnum.Current).GetCurrent().ToString("0.00") + "A \n";
+                    nodeCount++;
+                }
+            }
 			
 			return (outputResult+outputCurrentResult);
 		}

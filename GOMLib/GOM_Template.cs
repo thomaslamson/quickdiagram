@@ -109,8 +109,25 @@ namespace GOMLib
 					{
 						LoadStyleFromXML(node.ChildNodes[i].ChildNodes[j]);
 					}
-				}
-			}
+                }
+                #region new_modfied
+                if (System.String.Compare(node.ChildNodes[i].Name, "attribute", true) == 0)
+                {
+                    for (int j = 0; j < node.ChildNodes[i].ChildNodes.Count; j++)
+                    {
+                        LoadVarFromXML(node.ChildNodes[i].ChildNodes[j], j);
+                    }
+                }
+
+                if (System.String.Compare(node.ChildNodes[i].Name, "restrictions", true) == 0)
+                {
+                    for (int j = 0; j < node.ChildNodes[i].ChildNodes.Count; j++)
+                    {
+                        LoadRestrictionFromXML(node.ChildNodes[i].ChildNodes[j], j);
+                    }
+                }
+                #endregion
+            }
 
 			//2nd pass load
 			//  Constraints of points
@@ -226,8 +243,49 @@ namespace GOMLib
 					}
 				}
 			}
-		}
-		/// <summary>
+        }
+
+        //Load value from template
+        #region new_modified
+        private void LoadVarFromXML(System.Xml.XmlNode node, int index)
+        {
+            if (System.String.Compare(node.Name, "variable", true) == 0)
+            {
+                XMLline templine = new XMLline();
+                if (node.Attributes.GetNamedItem("id") != null)
+                    templine.type = node.Attributes.GetNamedItem("id").Value;
+                for (int j = 0; j < node.Attributes.Count; j++)
+                {
+                    XMLatt temp_class = new XMLatt();
+                    temp_class.aname  = node.Attributes[j].Name;
+                    temp_class.acontent  = node.Attributes[j].Value;
+                    templine.attributelist.Add(temp_class);
+                }
+                var_list.varlist.Add(templine);
+            }
+        }
+        private void LoadRestrictionFromXML(System.Xml.XmlNode node, int index)
+        {
+            if (System.String.Compare(node.Name, "rules", true) == 0)
+            {
+                XMLline templine = new XMLline();
+                if (node.Attributes.GetNamedItem("type") != null)
+                    templine.type = node.Attributes.GetNamedItem("type").Value;
+                for (int j = 0; j < node.Attributes.Count; j++)
+                {
+                    XMLatt temp_class = new XMLatt();
+                    temp_class.aname = node.Attributes[j].Name;
+                    temp_class.acontent = node.Attributes[j].Value;
+                    templine.attributelist.Add(temp_class); //add to the line
+                }
+                res_list.varlist.Add(templine);
+            }
+        }
+        #endregion
+
+
+
+        /// <summary>
 		/// Save this templete to a XML string
 		/// </summary>
 		/// <returns>A string that represents the template</returns>
@@ -408,7 +466,15 @@ namespace GOMLib
 		public GOM_Drawing_Styles	rgDrawingStyles;
 		/// <summary>The list of filling styles in the template</summary>
 		public GOM_Filling_Styles	rgFillingStyles;
-	}
+
+        #region new_modifed
+        /// <summary>The list of variables in the template</summary>
+        public Variablelist var_list = new Variablelist();
+        /// <summary>The list of restriction in the template</summary>
+        public Variablelist res_list = new Variablelist();
+        #endregion
+
+    }
 	/// <summary>
 	/// A dynamic list of GOM_Template
 	/// </summary>

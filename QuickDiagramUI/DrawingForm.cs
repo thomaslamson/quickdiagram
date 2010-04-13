@@ -63,16 +63,15 @@ namespace QuickDiagramUI
 			m_frmLink.LinkStyleChanged	+= new LinkStyleChangedEvent(m_frmLink_LinkStyleChanged);
 			m_frmLink.RemoveLink		+= new RemoveLinkEvent(m_frmLink_RemoveLink);
 
-            //xxx new add
             m_frmInfo = new InfoForm();
             m_frmInfo.TopLevel = false;
             m_frmInfo.FormBorderStyle = FormBorderStyle.None;
             m_frmInfo.Visible = false;
             m_frmInfo.DrawingInfoChanged += new DrawingInfoChanged(m_frmInfo_DrawingInfoChanged);
             tagInfo.TagControl = m_frmInfo;
-           //end 
+            //m_frmLink.LoadLinkStyle(Environment.CurrentDirectory + "\\Links");
 
-			tagColor.TagControl	= m_frmColor;
+            tagColor.TagControl	= m_frmColor;
 			tagEdit.TagControl	= m_frmEdit;
 			tagLink.TagControl	= m_frmLink;
 
@@ -230,8 +229,8 @@ namespace QuickDiagramUI
             this.tagInfo.TabIndex = 7;
             this.tagInfo.TagControl = null;
             this.tagInfo.TagIcon = ((System.Drawing.Image)(resources.GetObject("tagInfo.TagIcon")));
-            this.tagInfo.TagWindowHeight = 240;
-            this.tagInfo.TagWindowWidth = 180;
+            this.tagInfo.TagWindowHeight = 280;
+            this.tagInfo.TagWindowWidth = 250;
             this.tagInfo.Visible = false;
             // 
             // DrawingForm
@@ -290,9 +289,7 @@ namespace QuickDiagramUI
 
 		private string						m_currentFileName = "QuickDiagram.xml";
 
-        //xxx new add
-        public EEDomain.ReadFromXml readXmls;
-        //end add
+        public EEDomain.ReadFromXml EEXmls;   //ee class
 
 		public event MouseMoveOnDrawingAreaEvent	MouseMoveOnDrawingArea;
 		public event RecognitionResultChangedEvent	RecognitionResultChanged;
@@ -924,7 +921,14 @@ namespace QuickDiagramUI
 			GOMLib.GOM_Object_LinkNode startLinkNode	= GetLinkNode(link.m_startPt);
 			GOMLib.GOM_Object_LinkNode endLinkNode		= GetLinkNode(link.m_endPt);
 
-			if ( startLinkNode == null && endLinkNode == null )
+            //Restriction check
+            if (!cRestriction(link))
+            {
+                System.Windows.Forms.MessageBox.Show("One of the devices reach to the maxmium connection limit or null connection is used.");
+                return;
+            }
+
+            if ( startLinkNode == null && endLinkNode == null )
 			{
 				m_rgLinks.Add(link);
 				return;
@@ -1276,8 +1280,12 @@ namespace QuickDiagramUI
 			canvas = Graphics.FromImage(m_bitmap);
 			canvas.FillRectangle(System.Drawing.Brushes.White, 0, 0, m_bitmap.Width, m_bitmap.Height);
 
-			rgnSel = null;
-            DiagramConvertXml();
+            #region chester canvas
+            DisplayName(canvas);
+            #endregion
+
+            rgnSel = null;
+
 			for (int i = 0; i < m_rgObjects.Count; i++)
 			{
 				if (m_selObjs.Contains(m_rgObjects[i]) && (status.Action != UserActions.Sketching))
@@ -1298,13 +1306,6 @@ namespace QuickDiagramUI
 				}
 			}
 
-            //new add week10
-            if (readXmls != null)
-            {
-                readXmls.Show_info(canvas, m_rgObjects);
-            }
-            //end
-
 			for (int i = 0; i < m_rgLinks.Count; i++)
 			{
 				if ( m_rgLinks[i]==m_selectedLink && m_selObjs.Count==0 )
@@ -1315,9 +1316,9 @@ namespace QuickDiagramUI
 				{
 					m_rgLinks[i].Draw(canvas, m_rgObjects);
 				}
-			}
+            }
 
-			if (m_selectedLink != null)
+            if (m_selectedLink != null)
 			{
 				PointF	pt1, pt2;
 
@@ -1393,11 +1394,8 @@ namespace QuickDiagramUI
 					{
 						bColorTagVisible			= true;
 						m_frmColor.SelectedObject	= (GOMLib.GOM_Object_Primitive)obj;
-                        //new add at 10/10/2009
-                        m_frmInfo.setXmls(readXmls);
                         m_frmInfo.SelectedObject = (GOMLib.GOM_Object_Primitive)obj;
-                        //end
-					}
+                    }
 				}
 				else if (m_selObjs.Count > 1)
 				{
@@ -1459,6 +1457,7 @@ namespace QuickDiagramUI
 			}
 			tagEdit.Visible = bEditTagVisible;
 
+            #region "chester new add for display info box"
             //new add at 4/10/2009
             if (bColorTagVisible)
             {
@@ -1467,8 +1466,9 @@ namespace QuickDiagramUI
             }
             tagInfo.Visible = bColorTagVisible;
             //end  
+            #endregion
 
-			canvas.DrawRectangle(m_selectingPen, m_selectingRect);
+            canvas.DrawRectangle(m_selectingPen, m_selectingRect);
 
 			if (status.Action == UserActions.Linking)
 			{
@@ -1707,32 +1707,168 @@ namespace QuickDiagramUI
 		private void m_frmColor_FillingStyleChanged(GOMLib.GOM_Object_Primitive primitive, GOMLib.GOM_Style_Filling style)
 		{
 			DrawObjectsOnCanvas();
-		}
+        }
 
-        // xxx new add
+        #region
         private void m_frmInfo_DrawingInfoChanged()
         {
             DrawObjectsOnCanvas();
         }
-
-        //Convert the current Diagram to ReadFromXml type
+       //Convert the current Diagram to differntXML type
         public void DiagramConvertXml()
         {
-            EEDomain.ReadFromXml bak_xml = readXmls;
+            //convert diagram to xmlwriter
             GOMLib.GOM_Diagram diagram = new GOMLib.GOM_Diagram(m_rgObjects, m_rgLinks);
             System.IO.StringWriter stringWriter = new System.IO.StringWriter();
             System.Xml.XmlTextWriter xmltextWriter = new System.Xml.XmlTextWriter(stringWriter);
             diagram.SaveToXML(xmltextWriter);
             string diagramString = stringWriter.ToString();
-            readXmls = new EEDomain.ReadFromXml(diagramString, true);
-            if (bak_xml != null)
+            //convert xmlWriter to different XML class ( EE)
+            EEXmls = new EEDomain.ReadFromXml(diagramString);
+        }
+        //replace the line with specify style
+        public void DisplayName(Graphics canvas)
+        {
+            for (int a = 0; a < m_rgObjects.Count; a++)
             {
-                readXmls.SynDeviceList(bak_xml);
+                //loop objects
+                try
+                {
+                    string tempstr = "";
+                    GOMLib.GOM_Object_Primitive temp = (GOMLib.GOM_Object_Primitive)m_rgObjects[a];
+                    for (int i = 0; i < temp.var_list.varlist.Count; i++)
+                    {
+                        string t1 = ((GOMLib.XMLline)temp.var_list.varlist[i]).type;
+                        string t2 = temp.var_list.access(t1, "show");
+                        if (t2 != "")
+                        {
+                            string[] words = t2.Split(',');
+                            //loop vaiable content
+                            for (int j = 0; j < words.Length; j++)
+                            {
+                                switch (words[j])
+                                {
+                                    case " ":
+                                    case "+":
+                                    case ":":
+                                    case "-":
+                                    case "x":
+                                    case "/":
+                                    case "=":
+                                        tempstr = tempstr + words[j];
+                                        break;
+                                    default:
+                                        tempstr = tempstr + temp.var_list.access(t1, words[j]);
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                    //write it to the board
+                    Font myFont = new Font("Times New Roman", 10);
+                    RectangleF m_boundingBox = new System.Drawing.RectangleF(0, 0, 10, 10);
+                    System.Drawing.Drawing2D.LinearGradientBrush myBrush = new System.Drawing.Drawing2D.LinearGradientBrush(m_boundingBox, Color.Black, Color.Black, System.Drawing.Drawing2D.LinearGradientMode.Horizontal);
+                    canvas.DrawString(tempstr, myFont, myBrush, m_rgObjects[a].xOffset - 5, m_rgObjects[a].yOffset - 20);
+                }
+                catch { }
             }
         }
-        //end
+        public bool cRestriction(GOMLib.GOM_Link link)
+        {
+            string id1 = link.m_startObj.id;
+            string id2 = link.m_endObj.id;
 
-		private void DrawingForm_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+            //get the two  class for checking by their id
+            GOMLib.GOM_Object_Primitive obj1 = null;
+            GOMLib.GOM_Object_Primitive obj2 = null;
+            try
+            {
+                for (int i = 0; i < m_rgObjects.Count; i++)
+                {
+                    if (m_rgObjects[i].id == id1)
+                        obj1 = (GOMLib.GOM_Object_Primitive)m_rgObjects[i] ;
+                    if (m_rgObjects[i].id == id2)
+                        obj2 = (GOMLib.GOM_Object_Primitive)m_rgObjects[i];
+                    if (obj1 != null && obj2 != null)
+                        break;
+                }
+            }
+            catch 
+            {
+                return true;
+            }
+            if (obj1 == null || obj2 == null)
+                return true;
+            //Start Checking
+            bool check1, check2;
+            check1 = check_Start(obj1, obj2, link);
+            check2 = check_Start(obj2, obj1, link);
+            return (check1 && check2);
+        }
+        //check restriction
+        private bool check_Start(GOMLib.GOM_Object_Primitive obj_check, GOMLib.GOM_Object_Primitive obj_temp, GOMLib.GOM_Link link)
+        {
+            for (int i = 0; i < obj_check.res_list.varlist.Count; i++)
+            {
+                GOMLib.XMLline templine = (GOMLib.XMLline)obj_check.res_list.varlist[i];
+                switch (templine.type)
+                {
+                    case "connect_notallow":
+                        #region "function"
+                        string temps = templine.access("point");
+                        if (temps == ".self")
+                        {
+                             if (obj_check.id == obj_temp.id)
+                                 return false;
+                        }
+                        else
+                        {
+                            if (temps != "")
+                            {
+                                string[] words = temps.Split(',');
+                                string tempname =  obj_temp.var_list.access("info", "name");    //get the name of the obj_temp
+                                for (int j = 0; j < words.Length; j++)
+                                {
+                                    if (words[j] == tempname)
+                                        return false;
+                                }
+                            }
+                        }
+                        break;
+                        #endregion
+                    case "connect_max":
+                        #region "function"
+                        try
+                        {
+                            int maxno = int.Parse(templine.access("value"));
+                            int tempcount = 0;
+                            for (int j = 0; j < m_rgLinks.Count; j++)
+                            {
+                                if (m_rgLinks[j].m_endObj.id == obj_check.id)
+                                    tempcount = tempcount + 1;
+                                else if (m_rgLinks[j].m_startObj.id == obj_check.id)
+                                    tempcount = tempcount + 1;
+                                if (tempcount == maxno)
+                                    return false;
+                            }
+                            break;
+                        }
+                        catch { return true; }
+                        #endregion
+                    case "connect_point":
+                        #region "function"
+                        return true;
+                        break;
+                        #endregion
+                }//end main switch
+            }
+            return true;
+        }
+        #endregion
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        private void DrawingForm_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
 		{
 			m_CtrlPressed = e.Control;
 
@@ -2213,8 +2349,8 @@ namespace QuickDiagramUI
 		}
 
 		private void m_frmLink_LinkStyleChanged(GOMLib.GOM_Link link)
-		{
-			DrawObjectsOnCanvas();
+        {
+            DrawObjectsOnCanvas();
 		}
 
 		private void m_frmLink_RemoveLink(GOMLib.GOM_Link link)
@@ -2235,27 +2371,18 @@ namespace QuickDiagramUI
 		/// </summary>
 		public void SaveDiagramToFile()
 		{
-			SaveDiagramToFile(m_currentFileName, "others");
+			SaveDiagramToFile(m_currentFileName);
 		}
 
 		/// <summary>
 		/// Save the whole diagram to a xml file.
 		/// </summary>
 		/// <param name="fileName">File name into which the whole diagram is saved.</param>
-		public void SaveDiagramToFile( string fileName, string type)
+		public void SaveDiagramToFile( string fileName)
 		{
 			System.Xml.XmlTextWriter writer;
 			writer = new System.Xml.XmlTextWriter(fileName, System.Text.Encoding.UTF8);
-            switch (type)
-            { 
-                case "ee":
-                    readXmls.SaveVar(fileName);
-                    break;
-                case "others":
-                    break;
-                default: 
-                    break;
-            }
+           
 			SaveDiagramToXml(writer);
 			writer.Close();
 			m_currentFileName = fileName;
@@ -2275,14 +2402,6 @@ namespace QuickDiagramUI
 			System.Xml.XmlDocument	doc = new System.Xml.XmlDocument();
 			doc.Load( fileName );
             LoadDiagramFromXml(doc.DocumentElement);
-
-            //Syn EEDomain file - new add week11
-            try 
-            {
-                readXmls.LoadVar(fileName);
-                DrawObjectsOnCanvas();
-            }
-            catch { }
 		}
 
 		public void LoadDiagramFromXml( System.Xml.XmlNode node)

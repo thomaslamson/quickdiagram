@@ -13,9 +13,9 @@ import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\objsafe.idl";
 	helpstring("IStrokeRefinement Interface"),
 	pointer_default(unique)
 ] 
-#line 18 "d:\\new folder\\qd_new\\strokerefinelib\\strokerefinement.h"
+#line 18 "d:\\wqd\\strokerefinelib\\strokerefinement.h"
 interface IStrokeRefinement : IDispatch {
-#line 20 "d:\\new folder\\qd_new\\strokerefinelib\\strokerefinement.h"
+#line 20 "d:\\wqd\\strokerefinelib\\strokerefinement.h"
 	[id(1),helpstring("method Refine_MergeVertex")] HRESULT  Refine_MergeVertex([in] BSTR StrokeXML, [in] DOUBLE DistanceThreshold, [out,retval] BSTR *ResultXML);
 };
 
@@ -31,7 +31,7 @@ library StrokeRefineLib
 		uuid(1A512878-0A46-4EB9-9BED-7F902AF26A5F),
 		helpstring("StrokeRefinement Class")
 	] 
-#line 36 "d:\\new folder\\qd_new\\strokerefinelib\\strokerefinement.h"
+#line 36 "d:\\wqd\\strokerefinelib\\strokerefinement.h"
 	coclass CStrokeRefinement {
 		interface IStrokeRefinement;
 	};

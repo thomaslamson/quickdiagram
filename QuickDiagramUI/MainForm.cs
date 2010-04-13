@@ -44,21 +44,14 @@ namespace QuickDiagramUI
 		private System.Windows.Forms.ToolBarButton tbbDelete;
 		private System.Windows.Forms.ToolBarButton tbSep3;
 		private System.Windows.Forms.SaveFileDialog saveFileDlg;
-		private System.Windows.Forms.OpenFileDialog openFileDlg;
-		private System.Windows.Forms.MenuItem menuItem10;
-		private System.Windows.Forms.MenuItem menuItem11;
-		private System.Windows.Forms.MenuItem menuItem12;
-		private System.Windows.Forms.MenuItem menuItem13;
+        private System.Windows.Forms.OpenFileDialog openFileDlg;
+        private System.Windows.Forms.MenuItem menuItem11;
 		private System.Windows.Forms.MenuItem menuItem14;
 		private System.Windows.Forms.MenuItem menuItem15;
 		private System.Windows.Forms.MenuItem menuItem16;
 		private System.Windows.Forms.MenuItem menuItem17;
 		private System.ComponentModel.IContainer components;
-		private System.Windows.Forms.MenuItem menuItem18;
-        private MenuItem menuItem19;
-        private MenuItem menuItem20;
-
-		private EEDomain.ReadFromXml readXml;
+        private System.Windows.Forms.MenuItem menuItem18;
 
 		public MainForm()
 		{
@@ -128,13 +121,8 @@ namespace QuickDiagramUI
             this.menuItem5 = new System.Windows.Forms.MenuItem();
             this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.menuItem7 = new System.Windows.Forms.MenuItem();
-            this.menuItem19 = new System.Windows.Forms.MenuItem();
-            this.menuItem20 = new System.Windows.Forms.MenuItem();
             this.menuItem8 = new System.Windows.Forms.MenuItem();
             this.menuItem9 = new System.Windows.Forms.MenuItem();
-            this.menuItem10 = new System.Windows.Forms.MenuItem();
-            this.menuItem12 = new System.Windows.Forms.MenuItem();
-            this.menuItem13 = new System.Windows.Forms.MenuItem();
             this.menuItem11 = new System.Windows.Forms.MenuItem();
             this.menuItem14 = new System.Windows.Forms.MenuItem();
             this.menuItem15 = new System.Windows.Forms.MenuItem();
@@ -172,7 +160,6 @@ namespace QuickDiagramUI
             // 
             this.muMain.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem1,
-            this.menuItem10,
             this.menuItem11,
             this.menuItem16});
             // 
@@ -221,22 +208,8 @@ namespace QuickDiagramUI
             // menuItem7
             // 
             this.menuItem7.Index = 5;
-            this.menuItem7.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem19,
-            this.menuItem20});
             this.menuItem7.Text = "Save Diagram &as";
-            // 
-            // menuItem19
-            // 
-            this.menuItem19.Index = 0;
-            this.menuItem19.Text = "EE Diagram";
-            this.menuItem19.Click += new System.EventHandler(this.menuItem19_Click);
-            // 
-            // menuItem20
-            // 
-            this.menuItem20.Index = 1;
-            this.menuItem20.Text = "Others ...";
-            this.menuItem20.Click += new System.EventHandler(this.menuItem20_Click);
+            this.menuItem7.Click += new System.EventHandler(this.menuItem7_Click);
             // 
             // menuItem8
             // 
@@ -249,29 +222,9 @@ namespace QuickDiagramUI
             this.menuItem9.Text = "E&xit";
             this.menuItem9.Click += new System.EventHandler(this.menuItem9_Click);
             // 
-            // menuItem10
-            // 
-            this.menuItem10.Index = 1;
-            this.menuItem10.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem12,
-            this.menuItem13});
-            this.menuItem10.Text = "Input";
-            // 
-            // menuItem12
-            // 
-            this.menuItem12.Index = 0;
-            this.menuItem12.Text = "Diagram";
-            this.menuItem12.Click += new System.EventHandler(this.menuItem12_Click);
-            // 
-            // menuItem13
-            // 
-            this.menuItem13.Index = 1;
-            this.menuItem13.Text = "Value";
-            this.menuItem13.Click += new System.EventHandler(this.menuItem13_Click);
-            // 
             // menuItem11
             // 
-            this.menuItem11.Index = 2;
+            this.menuItem11.Index = 1;
             this.menuItem11.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem14,
             this.menuItem15});
@@ -291,7 +244,7 @@ namespace QuickDiagramUI
             // 
             // menuItem16
             // 
-            this.menuItem16.Index = 3;
+            this.menuItem16.Index = 2;
             this.menuItem16.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem17,
             this.menuItem18});
@@ -673,6 +626,7 @@ namespace QuickDiagramUI
 			frmDrawing.RecognitionResultStart	+= new RecognitionResultEvent(frmDrawing_RecognitionResultStart);
 			frmDrawing.RecognitionResultEnd		+= new RecognitionResultEvent(frmDrawing_RecognitionResultEnd);
 			frmDrawing.DrawingModeChanged		+= new DrawingModeChangedEvent(frmDrawing_DrawingModeChanged);
+            m_catalog.LoadTemplates(Environment.CurrentDirectory + "\\Templates");
 		}
 
 		private void frmDrawing_MouseMoveOnDrawingArea(int x, int y)
@@ -919,14 +873,14 @@ namespace QuickDiagramUI
 			}
 		}
 
-		private void OnSaveDiagramAs(string type)
+		private void OnSaveDiagramAs()
 		{
 			if ( saveFileDlg.ShowDialog(this) == DialogResult.OK )
 			{
 				DrawingForm	frmDrawing = (DrawingForm)this.ActiveMdiChild;
 				try
 				{
-                    frmDrawing.SaveDiagramToFile(saveFileDlg.FileName, type);
+                    frmDrawing.SaveDiagramToFile(saveFileDlg.FileName);
 				}
 				catch( Exception ex )
 				{
@@ -980,83 +934,49 @@ namespace QuickDiagramUI
 		
 		}
 
-		private void menuItem12_Click(object sender, System.EventArgs e)
-		{
-			
-			if ( openFileDlg.ShowDialog(this) == DialogResult.OK )
-			{
-				try
-				{
-					readXml = new EEDomain.ReadFromXml(openFileDlg.FileName,false);
-				}
-				catch( Exception ex )
-				{
-					MessageBox.Show( this, ex.Message, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error );
-				}
-			}
-			
-		}
-
+        //ee
 		private void menuItem17_Click(object sender, System.EventArgs e)
 		{
+            DrawingForm frmDrawing = (DrawingForm)this.ActiveMdiChild;
+            frmDrawing.DiagramConvertXml();
 			OutputForm form = new OutputForm();
 			form.Text = "Generate";
-			form.B3Action(readXml);
+            form.B3Action(frmDrawing.EEXmls);
 			form.Show();
 		}
-
-        //ADD 10/10/2009
+        //ee
 		private void menuItem14_Click(object sender, System.EventArgs e)
 		{
             DrawingForm frmDrawing = (DrawingForm)this.ActiveMdiChild;
-			OutputForm form = new OutputForm();
             frmDrawing.DiagramConvertXml();
-			form.Text = "Equation";
-            if (readXml != null)
-            {
-                form.B1Action(readXml);
-            }
-            else 
-            { 
-                form.B1Action(frmDrawing.readXmls);
-            }
+            OutputForm form = new OutputForm();
+            form.Text = "Equation";
+            form.B1Action(frmDrawing.EEXmls);
 			form.Show();
 		}
-
+        //ee
 		private void menuItem15_Click(object sender, System.EventArgs e)
 		{
-            DrawingForm frmDrawing = (DrawingForm)this.ActiveMdiChild;
-            frmDrawing.DiagramConvertXml();
-			OutputForm form = new OutputForm();
-			form.Text = "Calculate";
-            if (readXml != null)
+            try
             {
-                form.B2Action(readXml);
+                DrawingForm frmDrawing = (DrawingForm)this.ActiveMdiChild;
+                frmDrawing.DiagramConvertXml();
+                OutputForm form = new OutputForm();
+                form.Text = "Calculate";
+                form.B2Action(frmDrawing.EEXmls);
+                form.Show();
             }
-            else 
-            { 
-                form.B2Action(frmDrawing.readXmls);
+            catch
+            {
+                System.Windows.Forms.MessageBox.Show("Some components in the diagram may not be connected properly.");
             }
-			form.Show();
 		}
 
-		public void menuItem13_Click(object sender, System.EventArgs e)
-		{
-			//InputForm inputForm = new InputForm(readXml);
-            DrawingForm frmDrawing = (DrawingForm)this.ActiveMdiChild;
-            InputForm inputForm = new InputForm(frmDrawing.readXmls);
-			inputForm.Show();
-		
-		}
 
-        private void menuItem19_Click(object sender, EventArgs e)
-        {
-            OnSaveDiagramAs("ee");
-        }
 
-        private void menuItem20_Click(object sender, EventArgs e)
+        private void menuItem7_Click(object sender, EventArgs e)
         {
-            OnSaveDiagramAs("others");
+            OnSaveDiagramAs();
         }
         //end
 	}
