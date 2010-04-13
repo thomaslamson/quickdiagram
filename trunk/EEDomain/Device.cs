@@ -17,18 +17,21 @@ namespace EEDomain
 		private MergeNode mergeNode3;
 		private int nodeCount;
 		private bool isMinus = false; //to indicate the current is minus or plus
-		public Device()
+
+        private string Qname;      //the short form of the name
+        private string unit;        
+
+        #region "Method to access variable"
+        public Device()
 		{
 			nodeCount = 0;
             SetUnit("");
-            SettMainValue("0");
 		}
 
 		public void SetID(string i)
 		{
 			id = i ;
 		}
-
 		public string GetID()
 		{
 			return id;
@@ -37,7 +40,6 @@ namespace EEDomain
 		{
 			name = n;
 		}
-
 		public string GetName()
 		{
 			return name;
@@ -122,135 +124,100 @@ namespace EEDomain
 			return nodeCount;
         }
 
-        #region chester
-        private string Qname;
-        private string unit;
-
-        public string GetMainValue()
-        {
-            if (this.GetType().ToString().Equals("EEDomain.JFET"))
-            {
-                return ((EEDomain.JFET)this).GetModalName().ToString();
-            }
-
-            if (this.GetType().ToString().Equals("EEDomain.Diode"))
-            {
-                return ((EEDomain.Diode)this).GetModalName().ToString();
-            }
-
-            if (this.GetType().ToString().Equals("EEDomain.Opamp"))
-            {
-                return ((EEDomain.Opamp)this).GetModalName().ToString();
-            }
-
-            if (this.GetType().ToString().Equals("EEDomain.VsourceDC"))
-            {
-                return ((EEDomain.VsourceDC)this).GetVoltage().ToString();
-            }
-
-            if (this.GetType().ToString().Equals("EEDomain.Csource"))
-            {
-                return ((EEDomain.Csource)this).GetCurrent().ToString();
-            }
-
-            if (this.GetType().ToString().Equals("EEDomain.VsourceAC"))
-            {
-                return ((EEDomain.VsourceAC)this).GetVoltage().ToString();
-            }
-
-            if (this.GetType().ToString().Equals("EEDomain.Resistor"))
-            {
-                return ((EEDomain.Resistor)this).GetResistance().ToString();
-            }
-
-            if (this.GetType().ToString().Equals("EEDomain.Capacitor"))
-            {
-                return ((EEDomain.Capacitor)this).GetCapacitance().ToString();
-            }
-
-            if (this.GetType().ToString().Equals("EEDomain.Inductor"))
-            {
-                return ((EEDomain.Inductor)this).GetInductance().ToString();
-            }
-
-            if (this.GetType().ToString().Equals("EEDomain.Transitor"))
-            {
-                return ((EEDomain.Transitor)this).GetModalName().ToString();
-            }
-            return "x";
-        }
-
-        public void SettMainValue(string tempValue)
-        {
-            switch (this.GetType().ToString()) 
-            { 
-                case "EEDomain.JFET":
-                    ((EEDomain.JFET)this).SetModalName(tempValue);
-                    break;
-                case "EEDomain.Diode":
-                    ((EEDomain.Diode)this).SetModalName(tempValue);
-                    break;
-                case "EEDomain.Opamp":
-                    ((EEDomain.Opamp)this).SetModalName(tempValue);
-                    break;
-                case "EEDomain.VsourceDC":
-                    ((EEDomain.VsourceDC)this).SetVoltage(int.Parse(tempValue));
-                    break;
-                case "EEDomain.Csource":
-                    ((EEDomain.Csource)this).SetCurrent(int.Parse(tempValue));
-                    break;
-                case "EEDomain.VsourceAC":
-                    ((EEDomain.VsourceAC)this).SetVoltage((int.Parse(tempValue)));
-                    break;
-                case "EEDomain.Resistor":
-                    ((EEDomain.Resistor)this).SetResistance((int.Parse(tempValue)));
-                    break;
-                case "EEDomain.Capacitor":
-                    ((EEDomain.Capacitor)this).SetCapacitance(tempValue);
-                    break;
-                case "EEDomain.Inductor":
-                    ((EEDomain.Inductor)this).SetInductance(tempValue);
-                    break;
-                case "EEDomain.Transitor":
-                    ((EEDomain.Transitor)this).SetModalName(tempValue);
-                    break;
-            }
-
-        }
-
-        public string GetQName()
-        {
-            return Qname;
-        }
-
-        public void SetQName(string n)
-        {
-            Qname = n;
-        }
-
+        //Unit get/set
         public string GetUnit()
         {
             return unit;
         }
-
         public void SetUnit(string n)
         {
             unit = n;
         }
+        //Qname get/set
+        public string GetQName()
+        {
+            return Qname;
+        }
+        public void SetQName(string n)
+        {
+            Qname = n;
+        }
         #endregion
 
+ 
+        ////Convert the new class to old class
+        public void convert( System.Xml.XmlNodeReader node)
+        {
+            try
+            {
+                while (node.Read())
+                {
+                    //collect the attribute informatiom to class information
+                    #region "Get the name information"
+                    //Create the Internal atom list
+                    if (node.GetAttribute("id") == "info")
+                    {
+                        SetName(node.GetAttribute("name"));
+                        SetQName(node.GetAttribute("sname"));
+                        switch (name)
+                        {
+                            case "JFET":
+                                ((EEDomain.JFET)this).SetModalName(node.GetAttribute("modalName"));
+                                break;
+                            case "Diode":
+                                ((EEDomain.Diode)this).SetModalName(node.GetAttribute("ModalName"));
+                                ((EEDomain.Diode)this).SetCathode(node.GetAttribute("Cathode"));
+                                ((EEDomain.Diode)this).SetAnode(node.GetAttribute("Anode"));
+                                break;
+                            case "Opamp":
+                                ((EEDomain.Opamp)this).SetModalName(node.GetAttribute("modalName"));
+                                break;
+                            case "VsourceDC":
+                                ((EEDomain.VsourceDC)this).SetVoltage(int.Parse(node.GetAttribute("voltage")));
+                                break;
+                            case "Csource":
+                                // ((EEDomain.Csource)this).SetCurrent(int.Parse(node.GetAttribute("name")));
+                                break;
+                            case "VsourceAC":
+                                ((EEDomain.VsourceAC)this).SetVoltage((int.Parse(node.GetAttribute("name"))));
+                                break;
+                            case "Resistor":
+                                ((EEDomain.Resistor)this).SetResistance((int.Parse(node.GetAttribute("resistance"))));
+                                break;
+                            case "Capacitor":
+                                ((EEDomain.Capacitor)this).SetCapacitance(node.GetAttribute("capacitance"));
+                                break;
+                            case "Inductor":
+                                ((EEDomain.Inductor)this).SetInductance(node.GetAttribute("inductance"));
+                                break;
+                            case "Transitor":
+                                ((EEDomain.Transitor)this).SetModalName(node.GetAttribute("modalName"));
+                                ((EEDomain.Transitor)this).SetNB(node.GetAttribute("NB"));
+                                ((EEDomain.Transitor)this).SetNC(node.GetAttribute("NC"));
+                                ((EEDomain.Transitor)this).SetNE(node.GetAttribute("NE"));
+                                break;
+                        }
+                        if (node.GetAttribute("unit") !=null)
+                            SetUnit(node.GetAttribute("unit"));
+                    }
+                    #endregion
+                }
+            }
+            catch { };
+        }
+
+
     }
+
+#region "Device Class"
 
 	public class Resistor : Device
 	{	
 		private double resistance;
-		public Resistor(string id,string name, string qn)
-		{	
+		public Resistor(string id,string name)
+		{
+            SetID(id);
             SetName(name);
-            SetQName(qn);
-			SetID(id);
-            SetUnit("ohm");
-			SetResistance(5);
 		}
 
 		public void SetResistance(double r)
@@ -276,13 +243,10 @@ namespace EEDomain
 	public class VsourceDC : Device
 	{	private double voltage;
 
-		public VsourceDC(string id, string name, string qn)
+		public VsourceDC(string id, string name)
 		{
-			SetName(name);
-            SetQName(qn);
-			SetID(id);
-            SetUnit("v");
-			SetVoltage(10);			
+            SetName(name);
+			SetID(id);	
 		}
 
 		public void SetVoltage(double v)
@@ -324,8 +288,6 @@ namespace EEDomain
 		{
 			SetName(name);
 			SetID(id);
-			//SetInductance("0.0");
-			
 		}
 
 		public void SetInductance(string i)
@@ -354,13 +316,10 @@ namespace EEDomain
 	{	
 		private string capacitance;
 			
-		public Capacitor(string id,string name, string qn)
+		public Capacitor(string id,string name)
 		{
 			SetName(name);
 			SetID(id);
-			SetCapacitance("8");
-            SetUnit("F");
-            SetQName(qn);
 		}
 
 		public void SetCapacitance(string c)
@@ -394,9 +353,6 @@ namespace EEDomain
 		{	
 			SetName(name);
 			SetID(id);
-			SetVoltage(0.0);	
-			SetPhase(0.0);
-            SetUnit("v");
 		}
 
 		public void SetVoltage(double v)
@@ -479,12 +435,11 @@ namespace EEDomain
 		private string NB;
 		private string NE;
 		private string modalName;
-		public Transitor(string id,string name, string qn)
+		public Transitor(string id,string name)
 		{
 			SetName(name);
 			SetID(id);
 			SetModalName("npn");
-            SetQName(qn);
 			
 		}
 		public void SetModalName(string n)
@@ -573,7 +528,7 @@ namespace EEDomain
 		{	
 			return modalName;
 		}
-	}
+    }
 
-	
+#endregion
 }

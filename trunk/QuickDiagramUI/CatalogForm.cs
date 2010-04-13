@@ -50,39 +50,41 @@ namespace QuickDiagramUI
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			System.Resources.ResourceManager resources = new System.Resources.ResourceManager(typeof(CatalogForm));
-			this.tvCatalog = new System.Windows.Forms.TreeView();
-			this.imgsCatalog = new System.Windows.Forms.ImageList(this.components);
-			this.SuspendLayout();
-			// 
-			// tvCatalog
-			// 
-			this.tvCatalog.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tvCatalog.ImageList = this.imgsCatalog;
-			this.tvCatalog.Location = new System.Drawing.Point(0, 0);
-			this.tvCatalog.Name = "tvCatalog";
-			this.tvCatalog.Size = new System.Drawing.Size(192, 336);
-			this.tvCatalog.TabIndex = 0;
-			this.tvCatalog.DoubleClick += new System.EventHandler(this.tvCatalog_DoubleClick);
-			this.tvCatalog.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tvCatalog_MouseMove);
-			// 
-			// imgsCatalog
-			// 
-			this.imgsCatalog.ImageSize = new System.Drawing.Size(16, 16);
-			this.imgsCatalog.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgsCatalog.ImageStream")));
-			this.imgsCatalog.TransparentColor = System.Drawing.Color.Transparent;
-			// 
-			// CatalogForm
-			// 
-			this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
-			this.ClientSize = new System.Drawing.Size(192, 336);
-			this.Controls.Add(this.tvCatalog);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-			this.Name = "CatalogForm";
-			this.Text = "CatalogForm";
-			this.Load += new System.EventHandler(this.CatalogForm_Load);
-			this.ResumeLayout(false);
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CatalogForm));
+            this.tvCatalog = new System.Windows.Forms.TreeView();
+            this.imgsCatalog = new System.Windows.Forms.ImageList(this.components);
+            this.SuspendLayout();
+            // 
+            // tvCatalog
+            // 
+            this.tvCatalog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvCatalog.ImageIndex = 0;
+            this.tvCatalog.ImageList = this.imgsCatalog;
+            this.tvCatalog.Location = new System.Drawing.Point(0, 0);
+            this.tvCatalog.Name = "tvCatalog";
+            this.tvCatalog.SelectedImageIndex = 0;
+            this.tvCatalog.Size = new System.Drawing.Size(192, 336);
+            this.tvCatalog.TabIndex = 0;
+            this.tvCatalog.DoubleClick += new System.EventHandler(this.tvCatalog_DoubleClick);
+            this.tvCatalog.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tvCatalog_MouseMove);
+            // 
+            // imgsCatalog
+            // 
+            this.imgsCatalog.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imgsCatalog.ImageStream")));
+            this.imgsCatalog.TransparentColor = System.Drawing.Color.Transparent;
+            this.imgsCatalog.Images.SetKeyName(0, "");
+            // 
+            // CatalogForm
+            // 
+            this.AutoScaleBaseSize = new System.Drawing.Size(5, 15);
+            this.ClientSize = new System.Drawing.Size(192, 336);
+            this.Controls.Add(this.tvCatalog);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "CatalogForm";
+            this.Text = "CatalogForm";
+            this.Load += new System.EventHandler(this.CatalogForm_Load);
+            this.ResumeLayout(false);
 
 		}
 		#endregion

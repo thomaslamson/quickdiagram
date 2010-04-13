@@ -126,9 +126,23 @@ namespace GOMLib
 			for (int i = 0; i < obj.rgFillingStyles.Count; i++)
 			{
 				obj.rgFillingStyles[i].fillingStyle = (System.Drawing.Brush)this.FillingStyles(obj.rgFillingStyles[i].id).fillingStyle.Clone();
-			}
+            }
 
-			return obj;
+            //Clone
+            #region new_modified
+            //clone var
+            if (this.var_list != null)
+            {
+                obj.var_list = this.var_list.clone();
+            }
+            //clone restriction list
+            if (this.res_list != null)
+            {
+                obj.res_list = this.res_list.clone();
+            }
+            #endregion
+
+            return obj;
 		}
 		/// <summary>
 		/// Get a movable point according to the given coordinates
@@ -698,10 +712,71 @@ namespace GOMLib
 				{
 					primitive.LoadText(node.ChildNodes[i]);
 				}
+                #region new_modfied
+                //Load attribute
+                if (System.String.Compare(node.ChildNodes[i].Name, "attribute", true) == 0)
+                {
+                    for (int j = 0; j < node.ChildNodes[i].ChildNodes.Count; j++)
+                    {
+                        primitive.LoadVarFromXML(node.ChildNodes[i].ChildNodes[j], j);
+                    }
+                }
+                //Load restrictions
+                if (System.String.Compare(node.ChildNodes[i].Name, "restrictions", true) == 0)
+                {
+                    for (int j = 0; j < node.ChildNodes[i].ChildNodes.Count; j++)
+                    {
+                        primitive.LoadRestrictionFromXML(node.ChildNodes[i].ChildNodes[j], j);
+                    }
+                }
+                #endregion
 			}
 
 			return primitive;
 		}
+        //Load value from template
+        #region new_modified
+        /// <summary>
+		/// Update variable list
+		/// </summary>
+        public void LoadVarFromXML(System.Xml.XmlNode node, int index)
+        {
+            if (System.String.Compare(node.Name, "variable", true) == 0)
+            {
+                XMLline templine = new XMLline();
+                if (node.Attributes.GetNamedItem("id") != null)
+                    templine.type = node.Attributes.GetNamedItem("id").Value;
+                for (int j = 0; j < node.Attributes.Count; j++)
+                {
+                    XMLatt temp_class = new XMLatt();
+                    temp_class.aname = node.Attributes[j].Name;
+                    temp_class.acontent = node.Attributes[j].Value;
+                    templine.attributelist.Add(temp_class);
+                }
+                var_list.varlist.Add(templine);
+            }
+        }
+        /// <summary>
+        /// Update restriction list
+        /// </summary>
+        public void LoadRestrictionFromXML(System.Xml.XmlNode node, int index)
+        {
+            if (System.String.Compare(node.Name, "rules", true) == 0)
+            {
+                XMLline templine = new XMLline();
+                if (node.Attributes.GetNamedItem("type") != null)
+                    templine.type = node.Attributes.GetNamedItem("type").Value;
+                for (int j = 0; j < node.Attributes.Count; j++)
+                {
+                    XMLatt temp_class = new XMLatt();
+                    temp_class.aname = node.Attributes[j].Name;
+                    temp_class.acontent = node.Attributes[j].Value;
+                    templine.attributelist.Add(temp_class); //add to the line
+                }
+                res_list.varlist.Add(templine);
+            }
+        }
+        #endregion
 		/// <summary>
 		/// Update coordinates of points of the graphic object
 		/// </summary>
@@ -1073,13 +1148,26 @@ namespace GOMLib
 			}
 
 			CalculateBoundingBox();
-		}
-		/// <summary>
-		/// Clone a constraint
-		/// </summary>
-		/// <param name="constraint">The original constraint</param>
-		/// <returns>If successful, a constraint is returned. Otherwise, null is returned.</returns>
-		private GOM_Interface_Constraint CloneConstraint(GOM_Interface_Constraint constraint)
+
+            //from template
+            #region new_modified
+            if (template.var_list != null)
+            {
+                var_list = template.var_list.clone();
+            }
+
+            if (template.res_list != null)
+            {
+                res_list = template.res_list.clone();
+            }
+            #endregion
+        }
+        /// <summary>
+        /// Clone a constraint
+        /// </summary>
+        /// <param name="constraint">The original constraint</param>
+        /// <returns>If successful, a constraint is returned. Otherwise, null is returned.</returns>
+        private GOM_Interface_Constraint CloneConstraint(GOM_Interface_Constraint constraint)
 		{
 			if (constraint is GOM_Assignment_Constraint)
 			{
@@ -1300,6 +1388,41 @@ namespace GOMLib
 			}
 			writer.WriteEndElement();
 
+            //write var
+            #region new_modified
+
+            if (var_list != null && var_list.varlist.Count > 0)
+            {
+                writer.WriteStartElement("attribute");
+                for (int i = 0; i < var_list.varlist.Count; i++)
+                {
+                    writer.WriteStartElement("variable");
+                    for (int j = 0; j < ((XMLline)var_list.varlist[i]).attributelist.Count; j++)
+                    {
+                        writer.WriteAttributeString(((XMLatt)((XMLline)var_list.varlist[i]).attributelist[j]).aname, ((XMLatt)((XMLline)var_list.varlist[i]).attributelist[j]).acontent);
+                    }
+                    writer.WriteEndElement();
+                }
+                writer.WriteEndElement();
+            }
+
+            if (res_list != null && res_list.varlist.Count > 0)
+            {
+                //write restriction
+                writer.WriteStartElement("restrictions");
+                for (int i = 0; i < res_list.varlist.Count; i++)
+                {
+                    writer.WriteStartElement("rules");
+                    for (int j = 0; j < ((XMLline)res_list.varlist[i]).attributelist.Count; j++)
+                    {
+                        writer.WriteAttributeString(((XMLatt)((XMLline)res_list.varlist[i]).attributelist[j]).aname, ((XMLatt)((XMLline)res_list.varlist[i]).attributelist[j]).acontent);
+                                        }
+                    writer.WriteEndElement();
+                }
+                writer.WriteEndElement();
+            }
+            #endregion
+
 			writer.WriteStartElement(GOM_TAGS.TEXT);
 
 			writer.WriteStartElement(GOM_TAGS.CONTENT);
@@ -1391,6 +1514,24 @@ namespace GOMLib
 				{
 					LoadText(node.ChildNodes[i]);
 				}
+                #region new_modfied
+                //Load attribute
+                if (System.String.Compare(node.ChildNodes[i].Name, "attribute", true) == 0)
+                {
+                    for (int j = 0; j < node.ChildNodes[i].ChildNodes.Count; j++)
+                    {
+                        LoadVarFromXML(node.ChildNodes[i].ChildNodes[j], j);
+                    }
+                }
+                //Load restrictions
+                if (System.String.Compare(node.ChildNodes[i].Name, "restrictions", true) == 0)
+                {
+                    for (int j = 0; j < node.ChildNodes[i].ChildNodes.Count; j++)
+                    {
+                        LoadRestrictionFromXML(node.ChildNodes[i].ChildNodes[j], j);
+                    }
+                }
+                #endregion
 			}
 
 			CalculateBoundingBox();
@@ -1589,7 +1730,14 @@ namespace GOMLib
 		public GOM_Drawing_Styles	rgDrawingStyles;
 		/// <summary>The list of filling styles in the template</summary>
 		public GOM_Filling_Styles	rgFillingStyles;
-	}
+
+        #region new_modifed
+        /// <summary>The list of variables in the template</summary>
+        public Variablelist var_list;
+        /// <summary>The list of restriction in the template</summary>
+        public Variablelist res_list;
+        #endregion
+    }
 	/// <summary>
 	/// The group object
 	/// </summary>

@@ -454,7 +454,14 @@ namespace GOMLib
 			}
 			writer.WriteEndElement();
 
-			writer.WriteEndElement();
+            #region chester New add
+            //Variable
+            writer.WriteStartElement("Variable");
+            writer.WriteAttributeString("line_style", this.link_style);
+            writer.WriteAttributeString("line_value", this.link_value.ToString());
+            writer.WriteEndElement();
+            #endregion
+            writer.WriteEndElement();
 		}
 
 		/// <summary>
@@ -716,7 +723,12 @@ namespace GOMLib
 		public GOM_Style_Drawing			m_drawingStyle;
 		public GOM_Linking_Style			m_linkingStyle;
 		public GOM_Points					m_keyPts;
-	}
+
+        #region Chester link add
+        public string link_style = "none";
+        public int link_value = 1;
+        #endregion
+    }
 
 	public enum GOM_Terminal_Style	{None, Circle, Arrow, Triangle, Diamond}
 	public enum GOM_Linking_Style	{Line, Polyline, Curve}

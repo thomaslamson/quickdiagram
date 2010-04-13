@@ -13,9 +13,9 @@ import "C:\Program Files\Microsoft SDKs\Windows\v6.0A\include\objsafe.idl";
 	helpstring("IPrimitiveRecognition Interface"),
 	pointer_default(unique)
 ] 
-#line 19 "d:\\new folder\\qd_new\\recognition\\primitiverecognition.h"
+#line 19 "d:\\wqd\\recognition\\primitiverecognition.h"
 interface IPrimitiveRecognition : IDispatch {
-#line 21 "d:\\new folder\\qd_new\\recognition\\primitiverecognition.h"
+#line 21 "d:\\wqd\\recognition\\primitiverecognition.h"
 	[id(1),helpstring("method LoadTemplates")] HRESULT  LoadTemplates([in] BSTR TemplatePath);
 	[id(2),helpstring("method RecognizePrimitive")] HRESULT  RecognizeObjects([in] BSTR strokeXML, [out,retval] BSTR *resultXML);
 };
@@ -32,7 +32,7 @@ library Recognition
 		uuid(D8E8E148-F05C-4862-B6BC-A55C28E97F86),
 		helpstring("PrimitiveRecognition Class")
 	] 
-#line 38 "d:\\new folder\\qd_new\\recognition\\primitiverecognition.h"
+#line 38 "d:\\wqd\\recognition\\primitiverecognition.h"
 	coclass CPrimitiveRecognition {
 		interface IPrimitiveRecognition;
 	};

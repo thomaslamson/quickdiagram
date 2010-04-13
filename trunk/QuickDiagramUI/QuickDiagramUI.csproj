@@ -74,10 +74,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EEDomain">
-      <Name>EEDomain</Name>
-      <HintPath>..\EEDomain\bin\Debug\EEDomain.dll</HintPath>
-    </Reference>
     <Reference Include="System">
       <Name>System</Name>
     </Reference>
@@ -93,6 +89,10 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
     </Reference>
+    <ProjectReference Include="..\EEDomain\EEDomain.csproj">
+      <Project>{B3934031-ADAD-474E-9356-6D0472728121}</Project>
+      <Name>EEDomain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FloatControlLib\FloatControlLib.csproj">
       <Name>FloatControlLib</Name>
       <Project>{C60CE109-F279-42EC-9906-36FD91F5F665}</Project>
@@ -245,9 +245,6 @@
       <DependentUpon>StencilForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
